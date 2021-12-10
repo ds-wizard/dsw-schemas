@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$comment": "This schema describes KM import/export with KM metamodel 9",
+  "$comment": "This schema describes KM import/export with KM metamodel 10",
   "definitions": {
     "uuid": {
       "type": "string",
@@ -2777,16 +2777,16 @@
         "requestBody": {
           "type": "string"
         },
+        "responseItemId": {
+          "type": "string"
+        },
+        "responseItemTemplate": {
+          "type": "string"
+        },
+        "responseItemUrl": {
+          "type": "string"
+        },
         "responseListField": {
-          "type": "string"
-        },
-        "responseIdField": {
-          "type": "string"
-        },
-        "responseNameField": {
-          "type": "string"
-        },
-        "itemUrl": {
           "type": "string"
         },
         "annotations": {
@@ -2949,49 +2949,49 @@
             "changed"
           ]
         },
+        "responseItemId": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "responseItemTemplate": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "responseItemUrl": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
         "responseListField": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "responseIdField": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "responseNameField": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "itemUrl": {
           "type": "object",
           "properties": {
             "changed": {

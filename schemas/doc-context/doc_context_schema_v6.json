@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$comment": "This schema describes DSW Document Context with template metamodel v5.",
+  "$comment": "This schema describes DSW Document Context with template metamodel v6.",
   "definitions": {
     "uuid": {
       "type": "string",
@@ -514,9 +514,6 @@
         "id": {
           "type": "string"
         },
-        "itemUrl": {
-          "type": "string"
-        },
         "logo": {
           "type": "string"
         },
@@ -538,13 +535,16 @@
         "requestMethod": {
           "type": "string"
         },
-        "responseIdField": {
+        "responseItemId": {
+          "type": "string"
+        },
+        "responseItemTemplate": {
+          "type": "string"
+        },
+        "responseItemUrl": {
           "type": "string"
         },
         "responseListField": {
-          "type": "string"
-        },
-        "responseNameField": {
           "type": "string"
         },
         "uuid": {

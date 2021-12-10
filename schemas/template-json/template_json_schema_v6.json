@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$comment": "This schema template.json contents for template metamodel v5.",
+  "$comment": "This schema template.json contents for template metamodel v6.",
   "definitions": {
     "uuid": {
       "type": "string",
@@ -159,8 +159,8 @@
         },
         "metamodelVersion": {
           "type": "integer",
-          "minimum": 5,
-          "maximum": 5
+          "minimum": 6,
+          "maximum": 6
         },
         "recommendedPackageId": {
           "oneOf": [
