@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$comment": "This schema describes KM import/export with KM metamodel 6",
+  "$comment": "This schema describes KM import/export with KM metamodel 11",
   "definitions": {
     "uuid": {
       "type": "string",
@@ -27,6 +27,25 @@
         ".*": { "type": "string" }
       }
     },
+    "keyValuePair": {
+      "type": "object",
+      "title": "Key-Value Pair",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "listDict": {
+      "type": "array",
+      "title": "List of Key-Value Pairs",
+      "items": {
+        "$ref": "#/definitions/keyValuePair"
+      }
+    },
     "valueType": {
       "type": "string",
       "title": "Value Type",
@@ -37,12 +56,12 @@
         "TextQuestionValueType"
       ]
     },
-    "desirabilityLevel": {
-      "title": "Desirability Level",
-      "description": "Level to indicate if a question is desirable in certain phase of a questionnaire",
+    "desirabilityPhase": {
+      "title": "Desirability Phase",
+      "description": "Indicates if a question is desirable in certain phase of a project",
       "anyOf": [
         {
-          "type": "integer"
+          "$ref": "#/definitions/uuid"
         },
         {
           "type": "null"
@@ -112,8 +131,8 @@
       "properties": {
         "metamodelVersion": {
           "type": "number",
-          "minimum": 6,
-          "maximum": 6
+          "minimum": 11,
+          "maximum": 11
         },
         "name": {
           "type": "string"
@@ -330,6 +349,24 @@
         },
         {
           "$ref": "#/definitions/DeleteChoiceEvent"
+        },
+        {
+          "$ref": "#/definitions/AddMetricEvent"
+        },
+        {
+          "$ref": "#/definitions/EditMetricEvent"
+        },
+        {
+          "$ref": "#/definitions/DeleteMetricEvent"
+        },
+        {
+          "$ref": "#/definitions/AddPhaseEvent"
+        },
+        {
+          "$ref": "#/definitions/EditPhaseEvent"
+        },
+        {
+          "$ref": "#/definitions/DeletePhaseEvent"
         }
       ]
     },
@@ -353,8 +390,12 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
-        "name": {
-          "type": "string"
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -362,7 +403,8 @@
         "uuid",
         "parentUuid",
         "entityUuid",
-        "name"
+        "createdAt",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -386,22 +428,9 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
-        "name": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "required": [
-            "changed"
-          ]
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "chapterUuids": {
           "type": "object",
@@ -453,6 +482,54 @@
           "required": [
             "changed"
           ]
+        },
+        "metricUuids": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uuid"
+              }
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "phaseUuids": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uuid"
+              }
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -460,10 +537,13 @@
         "uuid",
         "parentUuid",
         "entityUuid",
-        "name",
+        "createdAt",
         "chapterUuids",
         "tagUuids",
-        "integrationUuids"
+        "integrationUuids",
+        "metricUuids",
+        "phaseUuids",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -487,11 +567,18 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "title": {
           "type": "string"
         },
         "text": {
           "$ref": "#/definitions/optionalString"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -499,8 +586,10 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "title",
-        "text"
+        "text",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -523,6 +612,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "title": {
           "type": "object",
@@ -568,6 +661,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -575,9 +682,11 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "title",
         "text",
-        "questionUuids"
+        "questionUuids",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -600,13 +709,18 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
         "eventType",
         "uuid",
         "parentUuid",
-        "entityUuid"
+        "entityUuid",
+        "createdAt"
       ],
       "additionalProperties": false
     },
@@ -630,6 +744,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "questionType": {
           "type": "string",
           "enum": ["OptionsQuestion"]
@@ -640,14 +758,17 @@
         "text": {
           "$ref": "#/definitions/optionalString"
         },
-        "requiredLevel": {
-          "$ref": "#/definitions/desirabilityLevel"
+        "requiredPhaseUuid": {
+          "$ref": "#/definitions/desirabilityPhase"
         },
         "tagUuids": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/uuid"
           }
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -655,11 +776,13 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "questionType",
         "title",
         "text",
-        "requiredLevel",
-        "tagUuids"
+        "requiredPhaseUuid",
+        "tagUuids",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -683,6 +806,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "questionType": {
           "type": "string",
           "enum": ["ListQuestion"]
@@ -693,14 +820,17 @@
         "text": {
           "$ref": "#/definitions/optionalString"
         },
-        "requiredLevel": {
-          "$ref": "#/definitions/desirabilityLevel"
+        "requiredPhaseUuid": {
+          "$ref": "#/definitions/desirabilityPhase"
         },
         "tagUuids": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/uuid"
           }
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -708,11 +838,13 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "questionType",
         "title",
         "text",
-        "requiredLevel",
-        "tagUuids"
+        "requiredPhaseUuid",
+        "tagUuids",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -736,6 +868,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "questionType": {
           "type": "string",
           "enum": ["ValueQuestion"]
@@ -746,8 +882,8 @@
         "text": {
           "$ref": "#/definitions/optionalString"
         },
-        "requiredLevel": {
-          "$ref": "#/definitions/desirabilityLevel"
+        "requiredPhaseUuid": {
+          "$ref": "#/definitions/desirabilityPhase"
         },
         "tagUuids": {
           "type": "array",
@@ -757,6 +893,9 @@
         },
         "valueType": {
           "$ref": "#/definitions/valueType"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -764,12 +903,14 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "questionType",
         "title",
         "text",
-        "requiredLevel",
+        "requiredPhaseUuid",
         "tagUuids",
-        "valueType"
+        "valueType",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -793,6 +934,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "questionType": {
           "type": "string",
           "enum": ["IntegrationQuestion"]
@@ -803,8 +948,8 @@
         "text": {
           "$ref": "#/definitions/optionalString"
         },
-        "requiredLevel": {
-          "$ref": "#/definitions/desirabilityLevel"
+        "requiredPhaseUuid": {
+          "$ref": "#/definitions/desirabilityPhase"
         },
         "tagUuids": {
           "type": "array",
@@ -817,6 +962,9 @@
         },
         "props": {
           "$ref": "#/definitions/stringMap"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -824,13 +972,15 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "questionType",
         "title",
         "text",
-        "requiredLevel",
+        "requiredPhaseUuid",
         "tagUuids",
         "integrationUuid",
-        "props"
+        "props",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -854,6 +1004,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "questionType": {
           "type": "string",
           "enum": ["MultiChoiceQuestion"]
@@ -864,14 +1018,17 @@
         "text": {
           "$ref": "#/definitions/optionalString"
         },
-        "requiredLevel": {
-          "$ref": "#/definitions/desirabilityLevel"
+        "requiredPhaseUuid": {
+          "$ref": "#/definitions/desirabilityPhase"
         },
         "tagUuids": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/uuid"
           }
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -879,11 +1036,13 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "questionType",
         "title",
         "text",
-        "requiredLevel",
-        "tagUuids"
+        "requiredPhaseUuid",
+        "tagUuids",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -906,6 +1065,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "questionType": {
           "type": "string",
@@ -939,14 +1102,14 @@
             "changed"
           ]
         },
-        "requiredLevel": {
+        "requiredPhaseUuid": {
           "type": "object",
           "properties": {
             "changed": {
               "type": "boolean"
             },
             "value": {
-              "$ref": "#/definitions/desirabilityLevel"
+              "$ref": "#/definitions/desirabilityPhase"
             }
           },
           "required": [
@@ -1020,6 +1183,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -1027,14 +1204,16 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "questionType",
         "title",
         "text",
-        "requiredLevel",
+        "requiredPhaseUuid",
         "tagUuids",
         "expertUuids",
         "referenceUuids",
-        "answerUuids"
+        "answerUuids",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -1057,6 +1236,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "questionType": {
           "type": "string",
@@ -1090,14 +1273,14 @@
             "changed"
           ]
         },
-        "requiredLevel": {
+        "requiredPhaseUuid": {
           "type": "object",
           "properties": {
             "changed": {
               "type": "boolean"
             },
             "value": {
-              "$ref": "#/definitions/desirabilityLevel"
+              "$ref": "#/definitions/desirabilityPhase"
             }
           },
           "required": [
@@ -1171,6 +1354,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -1178,14 +1375,16 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "questionType",
         "title",
         "text",
-        "requiredLevel",
+        "requiredPhaseUuid",
         "tagsUuids",
         "expertUuids",
         "referenceUuids",
-        "itemTemplateQuestionUuids"
+        "itemTemplateQuestionUuids",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -1208,6 +1407,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "questionType": {
           "type": "string",
@@ -1241,14 +1444,14 @@
             "changed"
           ]
         },
-        "requiredLevel": {
+        "requiredPhaseUuid": {
           "type": "object",
           "properties": {
             "changed": {
               "type": "boolean"
             },
             "value": {
-              "$ref": "#/definitions/desirabilityLevel"
+              "$ref": "#/definitions/desirabilityPhase"
             }
           },
           "required": [
@@ -1319,6 +1522,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -1326,14 +1543,16 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "questionType",
         "title",
         "text",
-        "requiredLevel",
+        "requiredPhaseUuid",
         "tagUuids",
         "expertUuids",
         "referenceUuids",
-        "valueType"
+        "valueType",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -1356,6 +1575,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "questionType": {
           "type": "string",
@@ -1389,14 +1612,14 @@
             "changed"
           ]
         },
-        "requiredLevel": {
+        "requiredPhaseUuid": {
           "type": "object",
           "properties": {
             "changed": {
               "type": "boolean"
             },
             "value": {
-              "$ref": "#/definitions/desirabilityLevel"
+              "$ref": "#/definitions/desirabilityPhase"
             }
           },
           "required": [
@@ -1481,6 +1704,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -1488,15 +1725,17 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "questionType",
         "title",
         "text",
-        "requiredLevel",
+        "requiredPhaseUuid",
         "tagUuids",
         "expertUuids",
         "referenceUuids",
         "integrationUuid",
-        "props"
+        "props",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -1519,6 +1758,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "questionType": {
           "type": "string",
@@ -1552,14 +1795,14 @@
             "changed"
           ]
         },
-        "requiredLevel": {
+        "requiredPhaseUuid": {
           "type": "object",
           "properties": {
             "changed": {
               "type": "boolean"
             },
             "value": {
-              "$ref": "#/definitions/desirabilityLevel"
+              "$ref": "#/definitions/desirabilityPhase"
             }
           },
           "required": [
@@ -1633,6 +1876,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -1640,14 +1897,16 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "questionType",
         "title",
         "text",
-        "requiredLevel",
+        "requiredPhaseUuid",
         "tagUuids",
         "expertUuids",
         "referenceUuids",
-        "choiceUuids"
+        "choiceUuids",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -1670,13 +1929,18 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
         "eventType",
         "uuid",
         "parentUuid",
-        "entityUuid"
+        "entityUuid",
+        "createdAt"
       ],
       "additionalProperties": false
     },
@@ -1700,6 +1964,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "label": {
           "type": "string"
         },
@@ -1711,6 +1979,9 @@
           "items": {
             "$ref": "#/definitions/metricMeasure"
           }
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -1718,9 +1989,11 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "label",
         "advice",
-        "metricMeasures"
+        "metricMeasures",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -1743,6 +2016,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "label": {
           "type": "object",
@@ -1799,6 +2076,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -1806,10 +2097,12 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "label",
         "advice",
         "followUpUuids",
-        "metricMeasures"
+        "metricMeasures",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -1832,13 +2125,18 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
         "eventType",
         "uuid",
         "parentUuid",
-        "entityUuid"
+        "entityUuid",
+        "createdAt"
       ],
       "additionalProperties": false
     },
@@ -1862,11 +2160,18 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "name": {
           "type": "string"
         },
         "email": {
           "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -1874,8 +2179,10 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "name",
-        "email"
+        "email",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -1899,6 +2206,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "name": {
           "type": "object",
           "properties": {
@@ -1926,6 +2237,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -1933,8 +2258,10 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "name",
-        "email"
+        "email",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -1957,13 +2284,18 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
         "eventType",
         "uuid",
         "parentUuid",
-        "entityUuid"
+        "entityUuid",
+        "createdAt"
       ],
       "additionalProperties": false
     },
@@ -1987,6 +2319,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "referenceType": {
           "type": "string",
           "enum": [
@@ -1995,6 +2331,9 @@
         },
         "shortUuid": {
           "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -2002,7 +2341,9 @@
         "uuid",
         "parentUuid",
         "entityUuid",
-        "shortUuid"
+        "createdAt",
+        "shortUuid",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2026,6 +2367,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "referenceType": {
           "type": "string",
           "enum": [
@@ -2038,6 +2383,9 @@
         },
         "label": {
           "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -2045,8 +2393,10 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "url",
-        "label"
+        "label",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2070,6 +2420,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "referenceType": {
           "type": "string",
           "enum": [
@@ -2081,6 +2435,9 @@
         },
         "description": {
           "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -2088,9 +2445,11 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "referenceType",
         "targetUuid",
-        "description"
+        "description",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2114,13 +2473,17 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "referenceType": {
           "type": "string",
           "enum": [
             "ResourcePageReference"
           ]
         },
-        "url": {
+        "shortUuid": {
           "type": "object",
           "properties": {
             "changed": {
@@ -2133,6 +2496,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -2140,8 +2517,10 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "referenceType",
-        "shortUuid"
+        "shortUuid",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2164,6 +2543,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "referenceType": {
           "type": "string",
@@ -2199,6 +2582,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -2206,9 +2603,11 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "referenceType",
         "url",
-        "label"
+        "label",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2231,6 +2630,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "referenceType": {
           "type": "string",
@@ -2265,6 +2668,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -2272,9 +2689,11 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "referenceType",
         "targetUuid",
-        "description"
+        "description",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2297,13 +2716,18 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
         "eventType",
         "uuid",
         "parentUuid",
-        "entityUuid"
+        "entityUuid",
+        "createdAt"
       ],
       "additionalProperties": false
     },
@@ -2327,6 +2751,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "name": {
           "type": "string"
         },
@@ -2335,6 +2763,9 @@
         },
         "color": {
           "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -2342,9 +2773,11 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "name",
         "description",
-        "color"
+        "color",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2367,6 +2800,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "name": {
           "type": "object",
@@ -2409,6 +2846,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -2416,9 +2867,11 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "name",
         "description",
-        "color"
+        "color",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2441,13 +2894,18 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
         "eventType",
         "uuid",
         "parentUuid",
-        "entityUuid"
+        "entityUuid",
+        "createdAt"
       ],
       "additionalProperties": false
     },
@@ -2471,6 +2929,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "id": {
           "type": "string"
         },
@@ -2493,22 +2955,25 @@
           "type": "string"
         },
         "requestHeaders": {
-          "type": "object"
+          "$ref": "#/definitions/listDict"
         },
         "requestBody": {
+          "type": "string"
+        },
+        "responseItemId": {
+          "type": "string"
+        },
+        "responseItemTemplate": {
+          "type": "string"
+        },
+        "responseItemUrl": {
           "type": "string"
         },
         "responseListField": {
           "type": "string"
         },
-        "responseIdField": {
-          "type": "string"
-        },
-        "responseNameField": {
-          "type": "string"
-        },
-        "itemUrl": {
-          "type": "string"
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -2516,6 +2981,7 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "id",
         "name",
         "logo",
@@ -2527,7 +2993,8 @@
         "responseListField",
         "responseIdField",
         "responseNameField",
-        "itemUrl"
+        "itemUrl",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2550,6 +3017,10 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "id": {
           "type": "object",
@@ -2645,7 +3116,7 @@
               "type": "boolean"
             },
             "value": {
-              "type": "string"
+              "$ref": "#/definitions/listDict"
             }
           },
           "required": [
@@ -2653,6 +3124,48 @@
           ]
         },
         "requestBody": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "responseItemId": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "responseItemTemplate": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "responseItemUrl": {
           "type": "object",
           "properties": {
             "changed": {
@@ -2680,42 +3193,14 @@
             "changed"
           ]
         },
-        "responseIdField": {
+        "annotations": {
           "type": "object",
           "properties": {
             "changed": {
               "type": "boolean"
             },
             "value": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "responseNameField": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "itemUrl": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "string"
+              "$ref": "#/definitions/listDict"
             }
           },
           "required": [
@@ -2728,6 +3213,7 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "id",
         "name",
         "logo",
@@ -2739,7 +3225,8 @@
         "responseListField",
         "responseIdField",
         "responseNameField",
-        "itemUrl"
+        "itemUrl",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2762,13 +3249,18 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
         "eventType",
         "uuid",
         "parentUuid",
-        "entityUuid"
+        "entityUuid",
+        "createdAt"
       ],
       "additionalProperties": false
     },
@@ -2792,6 +3284,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "targetUuid": {
           "$ref": "#/definitions/uuid"
         }
@@ -2801,6 +3297,7 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "targetUuid"
       ],
       "additionalProperties": false
@@ -2825,6 +3322,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "targetUuid": {
           "$ref": "#/definitions/uuid"
         }
@@ -2834,6 +3335,7 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "targetUuid"
       ],
       "additionalProperties": false
@@ -2858,6 +3360,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "targetUuid": {
           "$ref": "#/definitions/uuid"
         }
@@ -2867,6 +3373,7 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "targetUuid"
       ],
       "additionalProperties": false
@@ -2891,6 +3398,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "targetUuid": {
           "$ref": "#/definitions/uuid"
         }
@@ -2900,6 +3411,7 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "createdAt",
         "targetUuid"
       ],
       "additionalProperties": false
@@ -2924,8 +3436,15 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "label": {
           "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
         }
       },
       "required": [
@@ -2933,7 +3452,9 @@
         "uuid",
         "parentUuid",
         "entityUuid",
-        "label"
+        "createdAt",
+        "label",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -2957,6 +3478,10 @@
         "entityUuid": {
           "$ref": "#/definitions/uuid"
         },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "label": {
           "type": "object",
           "properties": {
@@ -2970,6 +3495,20 @@
           "required": [
             "changed"
           ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
         }
       },
       "required": [
@@ -2977,7 +3516,9 @@
         "uuid",
         "parentUuid",
         "entityUuid",
-        "label"
+        "createdAt",
+        "label",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -3000,13 +3541,355 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
         "eventType",
         "uuid",
         "parentUuid",
-        "entityUuid"
+        "entityUuid",
+        "createdAt"
+      ],
+      "additionalProperties": false
+    },
+    "AddPhaseEvent": {
+      "type": "object",
+      "title": "Add Phase Event",
+      "description": "Add a new phase to the KM",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "AddPhaseEvent"
+          ]
+        },
+        "uuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "parentUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "entityUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "$ref": "#/definitions/optionalString"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
+        }
+      },
+      "required": [
+        "eventType",
+        "uuid",
+        "parentUuid",
+        "entityUuid",
+        "createdAt",
+        "title",
+        "description",
+        "annotations"
+      ],
+      "additionalProperties": false
+    },
+    "EditPhaseEvent": {
+      "type": "object",
+      "title": "Edit Phase Event",
+      "description": "Edit an existing phase in the KM",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "EditPhaseEvent"
+          ]
+        },
+        "uuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "parentUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "entityUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "title": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "description": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        }
+      },
+      "required": [
+        "eventType",
+        "uuid",
+        "parentUuid",
+        "entityUuid",
+        "createdAt",
+        "title",
+        "description",
+        "annotations"
+      ],
+      "additionalProperties": false
+    },
+    "DeletePhaseEvent": {
+      "type": "object",
+      "title": "Delete Phase Event",
+      "description": "Delete an existing phase from the KM",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "DeletePhaseEvent"
+          ]
+        },
+        "uuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "parentUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "entityUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "eventType",
+        "uuid",
+        "parentUuid",
+        "entityUuid",
+        "createdAt"
+      ],
+      "additionalProperties": false
+    },
+    "AddMetricEvent": {
+      "type": "object",
+      "title": "Add Metric Event",
+      "description": "Add a new metric to the KM",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "AddMetricEvent"
+          ]
+        },
+        "uuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "parentUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "entityUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "title": {
+          "type": "string"
+        },
+        "abbreviation": {
+          "type": "string"
+        },
+        "description": {
+          "$ref": "#/definitions/optionalString"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
+        }
+      },
+      "required": [
+        "eventType",
+        "uuid",
+        "parentUuid",
+        "entityUuid",
+        "createdAt",
+        "title",
+        "abbreviation",
+        "description",
+        "annotations"
+      ],
+      "additionalProperties": false
+    },
+    "EditMetricEvent": {
+      "type": "object",
+      "title": "Edit Metric Event",
+      "description": "Edit an existing metric in the KM",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "EditMetricEvent"
+          ]
+        },
+        "uuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "parentUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "entityUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "title": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "abbreviation": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "description": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        }
+      },
+      "required": [
+        "eventType",
+        "uuid",
+        "parentUuid",
+        "entityUuid",
+        "createdAt",
+        "title",
+        "abbreviation",
+        "description",
+        "annotations"
+      ],
+      "additionalProperties": false
+    },
+    "DeleteMetricEvent": {
+      "type": "object",
+      "title": "Delete Metric Event",
+      "description": "Delete an existing metric from the KM",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "DeleteMetricEvent"
+          ]
+        },
+        "uuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "parentUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "entityUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "eventType",
+        "uuid",
+        "parentUuid",
+        "entityUuid",
+        "createdAt"
       ],
       "additionalProperties": false
     }
