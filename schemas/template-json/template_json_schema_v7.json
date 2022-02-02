@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$comment": "This schema template.json contents for template metamodel v7.",
+  "definitions": {
+    "uuid": {
+      "type": "string",
+      "title": "UUID",
+      "description": "UUID version 4 according to `RFC4122 <https://tools.ietf.org/html/rfc4122>`_",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+    },
+    "templateId": {
+      "type": "string",
+      "title": "Template ID",
+      "pattern": "^[a-zA-Z0-9\\-]+$"
+    },
+    "kmId": {
+      "type": "string",
+      "title": "Knowledge Model ID",
+      "pattern": "^[a-zA-Z0-9\\-]+$"
+    },
+    "orgId": {
+      "type": "string",
+      "title": "Organization ID",
+      "pattern": "^[a-zA-Z0-9\\.]+$"
+    },
+    "pkgId": {
+      "type": "string",
+      "title": "Package ID",
+      "pattern": "^[a-zA-Z0-9\\.]+:^[a-zA-Z0-9\\-]+:^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "semver": {
+      "type": "string",
+      "title": "SemVer",
+      "description": "Simple semantic version tag, e.g., ``1.0.45``",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "optionalString": {
+      "title": "Optional String",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "stringMap": {
+      "type": "object",
+      "title": "String Map",
+      "description": "Representation of simple map where both keys and values are strings",
+      "patternProperties": {
+        ".*": { "type": "string" }
+      }
+    },
+    "packageFilter": {
+      "type": "object",
+      "title": "KM Package Filter",
+      "properties": {
+        "orgId": {
+          "oneOf": [
+            { "$ref": "#/definitions/orgId" },
+            { "type": "null" }
+          ]
+        },
+        "kmId": {
+          "oneOf": [
+            { "$ref": "#/definitions/kmId" },
+            { "type": "null" }
+          ]
+        },
+        "minVersion": {
+          "oneOf": [
+            { "$ref": "#/definitions/semver" },
+            { "type": "null" }
+          ]
+        },
+        "maxVersion": {
+          "oneOf": [
+            { "$ref": "#/definitions/semver" },
+            { "type": "null" }
+          ]
+        },
+        "options": {
+          "$ref": "#/definitions/stringMap"
+        }
+      },
+      "additionalProperties": false
+    },
+    "step": {
+      "type": "object",
+      "title": "Format Step",
+      "properties": {
+        "name": {
+          "enum": ["json", "jinja", "pandoc", "wkhtmltopdf", "rdflib-convert"]
+        },
+        "options": {
+          "$ref": "#/definitions/stringMap"
+        }
+      },
+      "additionalProperties": false
+    },
+    "format": {
+      "type": "object",
+      "title": "Document Format",
+      "properties": {
+        "uuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "shortName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "icon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "color": {
+          "type": "string",
+          "minLength": 1
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/step"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "template": {
+      "type": "object",
+      "title": "Template Descriptor",
+      "properties": {
+        "templateId": {
+          "$ref": "#/definitions/templateId"
+        },
+        "organizationId": {
+          "$ref": "#/definitions/orgId"
+        },
+        "version": {
+          "$ref": "#/definitions/semver"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metamodelVersion": {
+          "type": "integer",
+          "minimum": 7,
+          "maximum": 7
+        },
+        "recommendedPackageId": {
+          "oneOf": [
+            { "$ref": "#/definitions/pkgId" },
+            { "type": "null" }
+          ]
+        },
+        "allowedPackages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/packageFilter"
+          }
+        },
+        "formats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/format"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "title": "Template.JSON",
+  "description": "The JSON representation of template description required for DSW document template.",
+  "$ref": "#/definitions/template"
+}
