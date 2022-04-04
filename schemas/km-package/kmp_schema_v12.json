@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$comment": "This schema describes KM import/export with KM metamodel 11",
+  "$comment": "This schema describes KM import/export with KM metamodel 12",
   "definitions": {
     "uuid": {
       "type": "string",
@@ -131,8 +131,8 @@
       "properties": {
         "metamodelVersion": {
           "type": "number",
-          "minimum": 11,
-          "maximum": 11
+          "minimum": 12,
+          "maximum": 12
         },
         "name": {
           "type": "string"
@@ -321,10 +321,16 @@
           "$ref": "#/definitions/DeleteTagEvent"
         },
         {
-          "$ref": "#/definitions/AddIntegrationEvent"
+          "$ref": "#/definitions/AddApiIntegrationEvent"
         },
         {
-          "$ref": "#/definitions/EditIntegrationEvent"
+          "$ref": "#/definitions/AddWidgetIntegrationEvent"
+        },
+        {
+          "$ref": "#/definitions/EditApiIntegrationEvent"
+        },
+        {
+          "$ref": "#/definitions/EditWidgetIntegrationEvent"
         },
         {
           "$ref": "#/definitions/DeleteIntegrationEvent"
@@ -2909,15 +2915,21 @@
       ],
       "additionalProperties": false
     },
-    "AddIntegrationEvent": {
+    "AddApiIntegrationEvent": {
       "type": "object",
-      "title": "Add Integration Event",
+      "title": "Add API Integration Event",
       "description": "Add a new integration to the KM",
       "properties": {
         "eventType": {
           "type": "string",
           "enum": [
             "AddIntegrationEvent"
+          ]
+        },
+        "integrationType": {
+          "type": "string",
+          "enum": [
+            "ApiIntegration"
           ]
         },
         "uuid": {
@@ -2948,6 +2960,9 @@
             "type": "string"
           }
         },
+        "itemUrl": {
+          "type": "string"
+        },
         "requestMethod": {
           "type": "string"
         },
@@ -2960,13 +2975,13 @@
         "requestBody": {
           "type": "string"
         },
+        "requestEmptySearch": {
+          "type": "boolean"
+        },
         "responseItemId": {
           "type": "string"
         },
         "responseItemTemplate": {
-          "type": "string"
-        },
-        "responseItemUrl": {
           "type": "string"
         },
         "responseListField": {
@@ -2986,19 +3001,91 @@
         "name",
         "logo",
         "props",
+        "itemUrl",
         "requestMethod",
         "requestUrl",
         "requestHeaders",
         "requestBody",
+        "requestEmptySearch",
         "responseListField",
         "responseIdField",
         "responseNameField",
-        "requestItemUrl",
         "annotations"
       ],
       "additionalProperties": false
     },
-    "EditIntegrationEvent": {
+    "AddWidgetIntegrationEvent": {
+      "type": "object",
+      "title": "Add Integration Event",
+      "description": "Add a new integration to the KM",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "AddIntegrationEvent"
+          ]
+        },
+        "integrationType": {
+          "type": "string",
+          "enum": [
+            "WidgetIntegration"
+          ]
+        },
+        "uuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "parentUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "entityUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "props": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "itemUrl": {
+          "type": "string"
+        },
+        "widgetUrl": {
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/definitions/listDict"
+        }
+      },
+      "required": [
+        "eventType",
+        "uuid",
+        "parentUuid",
+        "entityUuid",
+        "createdAt",
+        "id",
+        "name",
+        "logo",
+        "props",
+        "itemUrl",
+        "widgetUrl",
+        "annotations"
+      ],
+      "additionalProperties": false
+    },
+    "EditApiIntegrationEvent": {
       "type": "object",
       "title": "Edit Integration Event",
       "description": "Edit an existing integration entity",
@@ -3007,6 +3094,12 @@
           "type": "string",
           "enum": [
             "EditIntegrationEvent"
+          ]
+        },
+        "integrationType": {
+          "type": "string",
+          "enum": [
+            "ApiIntegration"
           ]
         },
         "uuid": {
@@ -3137,6 +3230,20 @@
             "changed"
           ]
         },
+        "requestEmptySearch": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
         "responseItemId": {
           "type": "object",
           "properties": {
@@ -3165,7 +3272,7 @@
             "changed"
           ]
         },
-        "responseItemUrl": {
+        "itemUrl": {
           "type": "object",
           "properties": {
             "changed": {
@@ -3222,10 +3329,159 @@
         "requestUrl",
         "requestHeaders",
         "requestBody",
+        "requestEmptySearch",
         "responseListField",
         "responseIdField",
         "responseNameField",
-        "requestItemUrl",
+        "itemUrl",
+        "annotations"
+      ],
+      "additionalProperties": false
+    },
+    "EditWidgetIntegrationEvent": {
+      "type": "object",
+      "title": "Edit Integration Event",
+      "description": "Edit an existing integration entity",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "EditIntegrationEvent"
+          ]
+        },
+        "integrationType": {
+          "type": "string",
+          "enum": [
+            "WidgetIntegration"
+          ]
+        },
+        "uuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "parentUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "entityUuid": {
+          "$ref": "#/definitions/uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "name": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "logo": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "props": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "itemUrl": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "widgetUrl": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        },
+        "annotations": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "$ref": "#/definitions/listDict"
+            }
+          },
+          "required": [
+            "changed"
+          ]
+        }
+      },
+      "required": [
+        "eventType",
+        "uuid",
+        "parentUuid",
+        "entityUuid",
+        "createdAt",
+        "id",
+        "name",
+        "logo",
+        "props",
+        "itemUrl",
+        "widgetUrl",
         "annotations"
       ],
       "additionalProperties": false
