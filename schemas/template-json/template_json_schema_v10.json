@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$comment": "This schema template.json contents for template metamodel v9.",
+  "$comment": "This schema template.json contents for template metamodel v10.",
   "definitions": {
     "uuid": {
       "type": "string",

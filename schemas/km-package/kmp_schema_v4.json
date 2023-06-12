@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$comment": "This schema describes KM import/export with KM metamodel 7",
+  "$comment": "This schema describes KM import/export with KM metamodel 4",
   "definitions": {
     "uuid": {
       "type": "string",
@@ -112,8 +112,8 @@
       "properties": {
         "metamodelVersion": {
           "type": "number",
-          "minimum": 7,
-          "maximum": 7
+          "minimum": 4,
+          "maximum": 4
         },
         "name": {
           "type": "string"
@@ -154,8 +154,8 @@
       "properties": {
         "metamodelVersion": {
           "type": "number",
-          "minimum": 7,
-          "maximum": 7
+          "minimum": 4,
+          "maximum": 4
         },
         "name": {
           "type": "string"
@@ -203,7 +203,7 @@
     },
     "event": {
       "title": "Event",
-      "description": "An event represents a single change in a KM. There are events for each entity type and usually three types of changes: **Add**, **Edit**, and **Delete**. In some cases, also **Move** event is possible.",
+      "description": "An event represents a single change in a KM. There are events for each entity type and usually three types of changes: **Add**, **Edit**, and **Delete**.",
       "anyOf": [
         {
           "$ref": "#/definitions/AddKnowledgeModelEvent"
@@ -233,9 +233,6 @@
           "$ref": "#/definitions/AddIntegrationQuestionEvent"
         },
         {
-          "$ref": "#/definitions/AddMultiChoiceQuestionEvent"
-        },
-        {
           "$ref": "#/definitions/EditOptionsQuestionEvent"
         },
         {
@@ -246,9 +243,6 @@
         },
         {
           "$ref": "#/definitions/EditIntegrationQuestionEvent"
-        },
-        {
-          "$ref": "#/definitions/EditMultiChoiceQuestionEvent"
         },
         {
           "$ref": "#/definitions/DeleteQuestionEvent"
@@ -309,27 +303,6 @@
         },
         {
           "$ref": "#/definitions/DeleteIntegrationEvent"
-        },
-        {
-          "$ref": "#/definitions/MoveQuestionEvent"
-        },
-        {
-          "$ref": "#/definitions/MoveAnswerEvent"
-        },
-        {
-          "$ref": "#/definitions/MoveExpertEvent"
-        },
-        {
-          "$ref": "#/definitions/MoveReferenceEvent"
-        },
-        {
-          "$ref": "#/definitions/AddChoiceEvent"
-        },
-        {
-          "$ref": "#/definitions/EditChoiceEvent"
-        },
-        {
-          "$ref": "#/definitions/DeleteChoiceEvent"
         }
       ]
     },
@@ -352,13 +325,17 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "name": {
+          "type": "string"
         }
       },
       "required": [
         "eventType",
         "uuid",
         "parentUuid",
-        "entityUuid"
+        "entityUuid",
+        "name"
       ],
       "additionalProperties": false
     },
@@ -381,6 +358,23 @@
         },
         "entityUuid": {
           "$ref": "#/definitions/uuid"
+        },
+        "name": {
+          "type": "object",
+          "properties": {
+            "changed": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "changed"
+          ]
         },
         "chapterUuids": {
           "type": "object",
@@ -439,6 +433,7 @@
         "uuid",
         "parentUuid",
         "entityUuid",
+        "name",
         "chapterUuids",
         "tagUuids",
         "integrationUuids"
@@ -809,59 +804,6 @@
         "tagUuids",
         "integrationUuid",
         "props"
-      ],
-      "additionalProperties": false
-    },
-    "AddMultiChoiceQuestionEvent": {
-    "type": "object",
-      "title": "Add Multi-Choice Question Event",
-      "description": "Add a new multi-choice question to the KM",
-      "properties": {
-        "eventType": {
-          "type": "string",
-          "enum": [
-            "AddQuestionEvent"
-          ]
-        },
-        "uuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "parentUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "entityUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "questionType": {
-          "type": "string",
-          "enum": ["MultiChoiceQuestion"]
-        },
-        "title": {
-          "type": "string"
-        },
-        "text": {
-          "$ref": "#/definitions/optionalString"
-        },
-        "requiredLevel": {
-          "$ref": "#/definitions/desirabilityLevel"
-        },
-        "tagUuids": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/uuid"
-          }
-        }
-      },
-      "required": [
-        "eventType",
-        "uuid",
-        "parentUuid",
-        "entityUuid",
-        "questionType",
-        "title",
-        "text",
-        "requiredLevel",
-        "tagUuids"
       ],
       "additionalProperties": false
     },
@@ -1475,157 +1417,6 @@
         "referenceUuids",
         "integrationUuid",
         "props"
-      ],
-      "additionalProperties": false
-    },
-    "EditMultiChoiceQuestionEvent": {
-      "type": "object",
-      "title": "Edit Multi-Choice Question Event",
-      "description": "Edit an existing multi-choice question in the KM",
-      "properties": {
-        "eventType": {
-          "type": "string",
-          "enum": [
-            "EditQuestionEvent"
-          ]
-        },
-        "uuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "parentUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "entityUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "questionType": {
-          "type": "string",
-          "enum": ["MultiChoiceQuestion"]
-        },
-        "title": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "text": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "$ref": "#/definitions/optionalString"
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "requiredLevel": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "$ref": "#/definitions/desirabilityLevel"
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "tagUuids": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/uuid"
-              }
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "expertUuids": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/uuid"
-              }
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "referenceUuids": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/uuid"
-              }
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        },
-        "choiceUuids": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/uuid"
-              }
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        }
-      },
-      "required": [
-        "eventType",
-        "uuid",
-        "parentUuid",
-        "entityUuid",
-        "questionType",
-        "title",
-        "text",
-        "requiredLevel",
-        "tagUuids",
-        "expertUuids",
-        "referenceUuids",
-        "choiceUuids"
       ],
       "additionalProperties": false
     },
@@ -2730,244 +2521,6 @@
           "type": "string",
           "enum": [
             "DeleteIntegrationEvent"
-          ]
-        },
-        "uuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "parentUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "entityUuid": {
-          "$ref": "#/definitions/uuid"
-        }
-      },
-      "required": [
-        "eventType",
-        "uuid",
-        "parentUuid",
-        "entityUuid"
-      ],
-      "additionalProperties": false
-    },
-    "MoveQuestionEvent": {
-      "type": "object",
-      "title": "Move Question Event",
-      "description": "Move an existing question to a different location in the KM",
-      "properties": {
-        "eventType": {
-          "type": "string",
-          "enum": [
-            "MoveQuestionEvent"
-          ]
-        },
-        "uuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "parentUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "entityUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "targetUuid": {
-          "$ref": "#/definitions/uuid"
-        }
-      },
-      "required": [
-        "eventType",
-        "uuid",
-        "parentUuid",
-        "entityUuid",
-        "targetUuid"
-      ],
-      "additionalProperties": false
-    },
-    "MoveAnswerEvent": {
-      "type": "object",
-      "title": "Move Answer Event",
-      "description": "Move an existing answer to a different location in the KM",
-      "properties": {
-        "eventType": {
-          "type": "string",
-          "enum": [
-            "MoveAnswerEvent"
-          ]
-        },
-        "uuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "parentUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "entityUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "targetUuid": {
-          "$ref": "#/definitions/uuid"
-        }
-      },
-      "required": [
-        "eventType",
-        "uuid",
-        "parentUuid",
-        "entityUuid",
-        "targetUuid"
-      ],
-      "additionalProperties": false
-    },
-    "MoveExpertEvent": {
-      "type": "object",
-      "title": "Move Expert Event",
-      "description": "Move an existing expert to a different location in the KM",
-      "properties": {
-        "eventType": {
-          "type": "string",
-          "enum": [
-            "MoveExpertEvent"
-          ]
-        },
-        "uuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "parentUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "entityUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "targetUuid": {
-          "$ref": "#/definitions/uuid"
-        }
-      },
-      "required": [
-        "eventType",
-        "uuid",
-        "parentUuid",
-        "entityUuid",
-        "targetUuid"
-      ],
-      "additionalProperties": false
-    },
-    "MoveReferenceEvent": {
-      "type": "object",
-      "title": "Move Reference Event",
-      "description": "Move an existing reference to a different location in the KM",
-      "properties": {
-        "eventType": {
-          "type": "string",
-          "enum": [
-            "MoveReferenceEvent"
-          ]
-        },
-        "uuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "parentUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "entityUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "targetUuid": {
-          "$ref": "#/definitions/uuid"
-        }
-      },
-      "required": [
-        "eventType",
-        "uuid",
-        "parentUuid",
-        "entityUuid",
-        "targetUuid"
-      ],
-      "additionalProperties": false
-    },
-    "AddChoiceEvent": {
-      "type": "object",
-      "title": "Add Choice Event",
-      "description": "Add a new choice to the KM",
-      "properties": {
-        "eventType": {
-          "type": "string",
-          "enum": [
-            "AddChoiceEvent"
-          ]
-        },
-        "uuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "parentUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "entityUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "label": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "eventType",
-        "uuid",
-        "parentUuid",
-        "entityUuid",
-        "label"
-      ],
-      "additionalProperties": false
-    },
-    "EditChoiceEvent": {
-      "type": "object",
-      "title": "Edit Choice Event",
-      "description": "Edit an existing choice in the KM",
-      "properties": {
-        "eventType": {
-          "type": "string",
-          "enum": [
-            "EditChoiceEvent"
-          ]
-        },
-        "uuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "parentUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "entityUuid": {
-          "$ref": "#/definitions/uuid"
-        },
-        "label": {
-          "type": "object",
-          "properties": {
-            "changed": {
-              "type": "boolean"
-            },
-            "value": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "changed"
-          ]
-        }
-      },
-      "required": [
-        "eventType",
-        "uuid",
-        "parentUuid",
-        "entityUuid",
-        "label"
-      ],
-      "additionalProperties": false
-    },
-    "DeleteChoiceEvent": {
-      "type": "object",
-      "title": "Delete Choice Event",
-      "description": "Delete an existing choice from the KM",
-      "properties": {
-        "eventType": {
-          "type": "string",
-          "enum": [
-            "DeleteChoiceEvent"
           ]
         },
         "uuid": {

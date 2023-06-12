@@ -173,8 +173,8 @@
       "properties": {
         "metamodelVersion": {
           "type": "number",
-          "minimum": 5,
-          "maximum": 5
+          "minimum": 11,
+          "maximum": 11
         },
         "name": {
           "type": "string"
