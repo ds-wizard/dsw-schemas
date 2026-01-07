@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$comment": "This schema describes DSW Document Context with template metamodel v17.0",
+  "$comment": "This schema describes DSW Document Context with template metamodel v17.1",
   "definitions": {
     "uuid": {
       "type": "string",
@@ -146,7 +146,36 @@
       "title": "Config",
       "description": "Configuration values useful for generating documents",
       "properties": {
+        "appTitle": {
+          "type": "string"
+        },
+        "appTitleShort": {
+          "type": "string"
+        },
         "clientUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "illustrationsColor": {
+          "type": "string"
+        },
+        "logoUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "primaryColor": {
+          "type": "string"
+        },
+        "serviceDomainName": {
+          "type": "string"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "serviceNameShort": {
+          "type": "string"
+        },
+        "serviceUrl": {
           "type": "string",
           "format": "uri"
         }
@@ -1858,7 +1887,7 @@
         },
         "metamodelVersion": {
           "type": "string",
-          "enum": ["17.0"]
+          "enum": ["17.1"]
         },
         "knowledgeModel": {
           "$ref": "#/definitions/knowledgeModel",

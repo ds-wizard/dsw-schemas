@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "This schema template.json contents for template metamodel v17.0",
+  "$comment": "This schema template.json contents for template metamodel v17.1",
   "definitions": {
     "uuid": {
       "type": "string",
@@ -151,7 +151,7 @@
         },
         "metamodelVersion": {
           "type": "string",
-          "enum": ["17.0"]
+          "enum": ["17.1"]
         },
         "allowedPackages": {
           "type": "array",
