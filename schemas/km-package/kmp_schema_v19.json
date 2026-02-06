@@ -231,7 +231,7 @@
         "events": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/event"
+            "$ref": "#/definitions/KnowledgeModelEventContent"
           }
         }
       }
