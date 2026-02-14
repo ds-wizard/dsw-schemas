@@ -92,7 +92,8 @@
       "title": "Format Step",
       "properties": {
         "name": {
-          "enum": ["json", "jinja", "pandoc", "wkhtmltopdf", "rdflib-convert"]
+          "type": "string",
+          "minLength": 1
         },
         "options": {
           "$ref": "#/definitions/stringMap"
