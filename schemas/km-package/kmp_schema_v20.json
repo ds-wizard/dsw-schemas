@@ -1,0 +1,3881 @@
+{
+  "$defs": {
+    "AddAnswerEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddAnswerEvent",
+          "default": "AddAnswerEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "advice": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Advice"
+        },
+        "metricMeasures": {
+          "items": {
+            "$ref": "#/$defs/MetricMeasure"
+          },
+          "title": "Metricmeasures",
+          "type": "array"
+        }
+      },
+      "required": [
+        "annotations",
+        "label",
+        "advice",
+        "metricMeasures"
+      ],
+      "title": "AddAnswerEventContent",
+      "type": "object"
+    },
+    "AddApiIntegrationEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddIntegrationEvent",
+          "default": "AddIntegrationEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "integrationType": {
+          "const": "ApiIntegration",
+          "default": "ApiIntegration",
+          "title": "Integrationtype",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "variables": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Variables",
+          "type": "array"
+        },
+        "allowCustomReply": {
+          "title": "Allowcustomreply",
+          "type": "boolean"
+        },
+        "requestMethod": {
+          "title": "Requestmethod",
+          "type": "string"
+        },
+        "requestUrl": {
+          "title": "Requesturl",
+          "type": "string"
+        },
+        "requestHeaders": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Requestheaders",
+          "type": "array"
+        },
+        "requestBody": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requestbody"
+        },
+        "requestAllowEmptySearch": {
+          "title": "Requestallowemptysearch",
+          "type": "boolean"
+        },
+        "responseListField": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Responselistfield"
+        },
+        "responseItemTemplate": {
+          "title": "Responseitemtemplate",
+          "type": "string"
+        },
+        "responseItemTemplateForSelection": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Responseitemtemplateforselection"
+        },
+        "testQ": {
+          "title": "Testq",
+          "type": "string"
+        },
+        "testVariables": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Testvariables",
+          "type": "object"
+        },
+        "testResponse": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TypeHintExchange"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "annotations",
+        "name",
+        "variables",
+        "allowCustomReply",
+        "requestMethod",
+        "requestUrl",
+        "requestHeaders",
+        "requestBody",
+        "requestAllowEmptySearch",
+        "responseListField",
+        "responseItemTemplate",
+        "responseItemTemplateForSelection",
+        "testQ",
+        "testVariables",
+        "testResponse"
+      ],
+      "title": "AddApiIntegrationEventContent",
+      "type": "object"
+    },
+    "AddChapterEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddChapterEvent",
+          "default": "AddChapterEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Text"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text"
+      ],
+      "title": "AddChapterEventContent",
+      "type": "object"
+    },
+    "AddChoiceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddChoiceEvent",
+          "default": "AddChoiceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "annotations",
+        "label"
+      ],
+      "title": "AddChoiceEventContent",
+      "type": "object"
+    },
+    "AddCrossReferenceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddReferenceEvent",
+          "default": "AddReferenceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "referenceType": {
+          "const": "CrossReference",
+          "default": "CrossReference",
+          "title": "Referencetype",
+          "type": "string"
+        },
+        "targetUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Targetuuid"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "annotations",
+        "targetUuid",
+        "description"
+      ],
+      "title": "AddCrossReferenceEventContent",
+      "type": "object"
+    },
+    "AddExpertEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddExpertEvent",
+          "default": "AddExpertEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "email": {
+          "title": "Email",
+          "type": "string"
+        }
+      },
+      "required": [
+        "annotations",
+        "name",
+        "email"
+      ],
+      "title": "AddExpertEventContent",
+      "type": "object"
+    },
+    "AddFileQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddQuestionEvent",
+          "default": "AddQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "questionType": {
+          "const": "FileQuestion",
+          "default": "FileQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Text"
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requiredphaseuuid"
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Taguuids",
+          "type": "array"
+        },
+        "maxSize": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Maxsize"
+        },
+        "fileTypes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Filetypes"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "maxSize",
+        "fileTypes"
+      ],
+      "title": "AddFileQuestionEventContent",
+      "type": "object"
+    },
+    "AddIntegrationQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddQuestionEvent",
+          "default": "AddQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "questionType": {
+          "const": "IntegrationQuestion",
+          "default": "IntegrationQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Text"
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requiredphaseuuid"
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Taguuids",
+          "type": "array"
+        },
+        "integrationUuid": {
+          "format": "uuid",
+          "title": "Integrationuuid",
+          "type": "string"
+        },
+        "variables": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Variables",
+          "type": "object"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "integrationUuid",
+        "variables"
+      ],
+      "title": "AddIntegrationQuestionEventContent",
+      "type": "object"
+    },
+    "AddItemSelectQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddQuestionEvent",
+          "default": "AddQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "questionType": {
+          "const": "ItemSelectQuestion",
+          "default": "ItemSelectQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Text"
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requiredphaseuuid"
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Taguuids",
+          "type": "array"
+        },
+        "listQuestionUuid": {
+          "format": "uuid",
+          "title": "Listquestionuuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "listQuestionUuid"
+      ],
+      "title": "AddItemSelectQuestionEventContent",
+      "type": "object"
+    },
+    "AddKnowledgeModelEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddKnowledgeModelEvent",
+          "default": "AddKnowledgeModelEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "annotations"
+      ],
+      "title": "AddKnowledgeModelEventContent",
+      "type": "object"
+    },
+    "AddListQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddQuestionEvent",
+          "default": "AddQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "questionType": {
+          "const": "ListQuestion",
+          "default": "ListQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Text"
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requiredphaseuuid"
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Taguuids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids"
+      ],
+      "title": "AddListQuestionEventContent",
+      "type": "object"
+    },
+    "AddMetricEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddMetricEvent",
+          "default": "AddMetricEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "abbreviation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Abbreviation"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "abbreviation",
+        "description"
+      ],
+      "title": "AddMetricEventContent",
+      "type": "object"
+    },
+    "AddMultiChoiceQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddQuestionEvent",
+          "default": "AddQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "questionType": {
+          "const": "MultiChoiceQuestion",
+          "default": "MultiChoiceQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Text"
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requiredphaseuuid"
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Taguuids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids"
+      ],
+      "title": "AddMultiChoiceQuestionEventContent",
+      "type": "object"
+    },
+    "AddOptionsQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddQuestionEvent",
+          "default": "AddQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "questionType": {
+          "const": "OptionsQuestion",
+          "default": "OptionsQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Text"
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requiredphaseuuid"
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Taguuids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids"
+      ],
+      "title": "AddOptionsQuestionEventContent",
+      "type": "object"
+    },
+    "AddPhaseEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddPhaseEvent",
+          "default": "AddPhaseEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "description"
+      ],
+      "title": "AddPhaseEventContent",
+      "type": "object"
+    },
+    "AddPluginIntegrationEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddIntegrationEvent",
+          "default": "AddIntegrationEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "integrationType": {
+          "const": "PluginIntegration",
+          "default": "PluginIntegration",
+          "title": "Integrationtype",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "variables": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Variables",
+          "type": "array"
+        },
+        "pluginUuid": {
+          "format": "uuid",
+          "title": "Pluginuuid",
+          "type": "string"
+        },
+        "pluginIntegrationId": {
+          "title": "Pluginintegrationid",
+          "type": "string"
+        },
+        "pluginIntegrationSettings": {
+          "additionalProperties": true,
+          "title": "Pluginintegrationsettings",
+          "type": "object"
+        }
+      },
+      "required": [
+        "annotations",
+        "name",
+        "variables",
+        "pluginUuid",
+        "pluginIntegrationId",
+        "pluginIntegrationSettings"
+      ],
+      "title": "AddPluginIntegrationEventContent",
+      "type": "object"
+    },
+    "AddResourceCollectionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddResourceCollectionEvent",
+          "default": "AddResourceCollectionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "annotations",
+        "title"
+      ],
+      "title": "AddResourceCollectionEventContent",
+      "type": "object"
+    },
+    "AddResourcePageEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddResourcePageEvent",
+          "default": "AddResourcePageEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "content": {
+          "title": "Content",
+          "type": "string"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "content"
+      ],
+      "title": "AddResourcePageEventContent",
+      "type": "object"
+    },
+    "AddResourcePageReferenceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddReferenceEvent",
+          "default": "AddReferenceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "referenceType": {
+          "const": "ResourcePageReference",
+          "default": "ResourcePageReference",
+          "title": "Referencetype",
+          "type": "string"
+        },
+        "resourcePageUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Resourcepageuuid"
+        }
+      },
+      "required": [
+        "annotations",
+        "resourcePageUuid"
+      ],
+      "title": "AddResourcePageReferenceEventContent",
+      "type": "object"
+    },
+    "AddTagEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddTagEvent",
+          "default": "AddTagEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description"
+        },
+        "color": {
+          "title": "Color",
+          "type": "string"
+        }
+      },
+      "required": [
+        "annotations",
+        "name",
+        "description",
+        "color"
+      ],
+      "title": "AddTagEventContent",
+      "type": "object"
+    },
+    "AddURLReferenceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddReferenceEvent",
+          "default": "AddReferenceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "referenceType": {
+          "const": "URLReference",
+          "default": "URLReference",
+          "title": "Referencetype",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "annotations",
+        "url",
+        "label"
+      ],
+      "title": "AddURLReferenceEventContent",
+      "type": "object"
+    },
+    "AddValueQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "AddQuestionEvent",
+          "default": "AddQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "questionType": {
+          "const": "ValueQuestion",
+          "default": "ValueQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Text"
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requiredphaseuuid"
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Taguuids",
+          "type": "array"
+        },
+        "valueType": {
+          "enum": [
+            "StringQuestionValueType",
+            "NumberQuestionValueType",
+            "DateQuestionValueType",
+            "DateTimeQuestionValueType",
+            "TimeQuestionValueType",
+            "TextQuestionValueType",
+            "EmailQuestionValueType",
+            "UrlQuestionValueType",
+            "ColorQuestionValueType"
+          ],
+          "title": "Valuetype",
+          "type": "string"
+        },
+        "validations": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "DoiQuestionValidation": "#/$defs/DoiQuestionValidation",
+                "DomainQuestionValidation": "#/$defs/DomainQuestionValidation",
+                "FromDateQuestionValidation": "#/$defs/FromDateQuestionValidation",
+                "FromDateTimeQuestionValidation": "#/$defs/FromDateTimeQuestionValidation",
+                "FromTimeQuestionValidation": "#/$defs/FromTimeQuestionValidation",
+                "MaxLengthQuestionValidation": "#/$defs/MaxLengthQuestionValidation",
+                "MaxNumberQuestionValidation": "#/$defs/MaxNumberQuestionValidation",
+                "MinLengthQuestionValidation": "#/$defs/MinLengthQuestionValidation",
+                "MinNumberQuestionValidation": "#/$defs/MinNumberQuestionValidation",
+                "OrcidQuestionValidation": "#/$defs/OrcidQuestionValidation",
+                "RegexQuestionValidation": "#/$defs/RegexQuestionValidation",
+                "ToDateQuestionValidation": "#/$defs/ToDateQuestionValidation",
+                "ToDateTimeQuestionValidation": "#/$defs/ToDateTimeQuestionValidation",
+                "ToTimeQuestionValidation": "#/$defs/ToTimeQuestionValidation"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/MinLengthQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/MaxLengthQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/RegexQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/OrcidQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/DoiQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/MinNumberQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/MaxNumberQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/FromDateQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/ToDateQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/FromDateTimeQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/ToDateTimeQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/FromTimeQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/ToTimeQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/DomainQuestionValidation"
+              }
+            ]
+          },
+          "title": "Validations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "valueType",
+        "validations"
+      ],
+      "title": "AddValueQuestionEventContent",
+      "type": "object"
+    },
+    "DeleteAnswerEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteAnswerEvent",
+          "default": "DeleteAnswerEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteAnswerEventContent",
+      "type": "object"
+    },
+    "DeleteChapterEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteChapterEvent",
+          "default": "DeleteChapterEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteChapterEventContent",
+      "type": "object"
+    },
+    "DeleteChoiceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteChoiceEvent",
+          "default": "DeleteChoiceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteChoiceEventContent",
+      "type": "object"
+    },
+    "DeleteExpertEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteExpertEvent",
+          "default": "DeleteExpertEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteExpertEventContent",
+      "type": "object"
+    },
+    "DeleteIntegrationEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteIntegrationEvent",
+          "default": "DeleteIntegrationEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteIntegrationEventContent",
+      "type": "object"
+    },
+    "DeleteMetricEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteMetricEvent",
+          "default": "DeleteMetricEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteMetricEventContent",
+      "type": "object"
+    },
+    "DeletePhaseEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeletePhaseEvent",
+          "default": "DeletePhaseEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeletePhaseEventContent",
+      "type": "object"
+    },
+    "DeleteQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteQuestionEvent",
+          "default": "DeleteQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteQuestionEventContent",
+      "type": "object"
+    },
+    "DeleteReferenceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteReferenceEvent",
+          "default": "DeleteReferenceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteReferenceEventContent",
+      "type": "object"
+    },
+    "DeleteResourceCollectionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteResourceCollectionEvent",
+          "default": "DeleteResourceCollectionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteResourceCollectionEventContent",
+      "type": "object"
+    },
+    "DeleteResourcePageEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteResourcePageEvent",
+          "default": "DeleteResourcePageEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteResourcePageEventContent",
+      "type": "object"
+    },
+    "DeleteTagEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "DeleteTagEvent",
+          "default": "DeleteTagEvent",
+          "title": "Eventtype",
+          "type": "string"
+        }
+      },
+      "title": "DeleteTagEventContent",
+      "type": "object"
+    },
+    "DoiQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "DoiQuestionValidation",
+          "default": "DoiQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "DoiQuestionValidation",
+      "type": "object"
+    },
+    "DomainQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "DomainQuestionValidation",
+          "default": "DomainQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "DomainQuestionValidation",
+      "type": "object"
+    },
+    "EditAnswerEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditAnswerEvent",
+          "default": "EditAnswerEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "label": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "advice": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "metricMeasures": {
+          "$ref": "#/$defs/EditEventField_list_MetricMeasure__"
+        },
+        "followUpUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        }
+      },
+      "required": [
+        "annotations",
+        "label",
+        "advice",
+        "metricMeasures",
+        "followUpUuids"
+      ],
+      "title": "EditAnswerEventContent",
+      "type": "object"
+    },
+    "EditApiIntegrationEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditIntegrationEvent",
+          "default": "EditIntegrationEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "integrationType": {
+          "const": "ApiIntegration",
+          "default": "ApiIntegration",
+          "title": "Integrationtype",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "variables": {
+          "$ref": "#/$defs/EditEventField_list_str__"
+        },
+        "allowCustomReply": {
+          "$ref": "#/$defs/EditEventField_bool_"
+        },
+        "requestMethod": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "requestUrl": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "requestHeaders": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "requestBody": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "requestAllowEmptySearch": {
+          "$ref": "#/$defs/EditEventField_bool_"
+        },
+        "responseListField": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "responseItemTemplate": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "responseItemTemplateForSelection": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "testQ": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "testVariables": {
+          "$ref": "#/$defs/EditEventField_dict_str__str__"
+        },
+        "testResponse": {
+          "$ref": "#/$defs/EditEventField_Union_TypeHintExchange__NoneType__"
+        }
+      },
+      "required": [
+        "annotations",
+        "name",
+        "variables",
+        "allowCustomReply",
+        "requestMethod",
+        "requestUrl",
+        "requestHeaders",
+        "requestBody",
+        "requestAllowEmptySearch",
+        "responseListField",
+        "responseItemTemplate",
+        "responseItemTemplateForSelection",
+        "testQ",
+        "testVariables",
+        "testResponse"
+      ],
+      "title": "EditApiIntegrationEventContent",
+      "type": "object"
+    },
+    "EditChapterEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditChapterEvent",
+          "default": "EditChapterEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "text": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "questionUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "questionUuids"
+      ],
+      "title": "EditChapterEventContent",
+      "type": "object"
+    },
+    "EditChoiceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditChoiceEvent",
+          "default": "EditChoiceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "label": {
+          "$ref": "#/$defs/EditEventField_str_"
+        }
+      },
+      "required": [
+        "annotations",
+        "label"
+      ],
+      "title": "EditChoiceEventContent",
+      "type": "object"
+    },
+    "EditCrossReferenceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditReferenceEvent",
+          "default": "EditReferenceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "referenceType": {
+          "const": "CrossReference",
+          "default": "CrossReference",
+          "title": "Referencetype",
+          "type": "string"
+        },
+        "targetUuid": {
+          "$ref": "#/$defs/EditEventField_UUID_"
+        },
+        "description": {
+          "$ref": "#/$defs/EditEventField_str_"
+        }
+      },
+      "required": [
+        "annotations",
+        "targetUuid",
+        "description"
+      ],
+      "title": "EditCrossReferenceEventContent",
+      "type": "object"
+    },
+    "EditEventField_Literal__StringQuestionValueType____NumberQuestionValueType____DateQuestionValueType____DateTimeQuestionValueType____TimeQuestionValueType____TextQuestionValueType____EmailQuestionValueType____UrlQuestionValueType____ColorQuestionValueType___": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "enum": [
+                "StringQuestionValueType",
+                "NumberQuestionValueType",
+                "DateQuestionValueType",
+                "DateTimeQuestionValueType",
+                "TimeQuestionValueType",
+                "TextQuestionValueType",
+                "EmailQuestionValueType",
+                "UrlQuestionValueType",
+                "ColorQuestionValueType"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[Literal['StringQuestionValueType', 'NumberQuestionValueType', 'DateQuestionValueType', 'DateTimeQuestionValueType', 'TimeQuestionValueType', 'TextQuestionValueType', 'EmailQuestionValueType', 'UrlQuestionValueType', 'ColorQuestionValueType']]",
+      "type": "object"
+    },
+    "EditEventField_UUID_": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[UUID]",
+      "type": "object"
+    },
+    "EditEventField_Union_TypeHintExchange__NoneType__": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TypeHintExchange"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[Union[TypeHintExchange, NoneType]]",
+      "type": "object"
+    },
+    "EditEventField_Union_UUID__NoneType__": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[Union[UUID, NoneType]]",
+      "type": "object"
+    },
+    "EditEventField_Union_int__NoneType__": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[Union[int, NoneType]]",
+      "type": "object"
+    },
+    "EditEventField_Union_str__NoneType__": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[Union[str, NoneType]]",
+      "type": "object"
+    },
+    "EditEventField_bool_": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[bool]",
+      "type": "object"
+    },
+    "EditEventField_dict_": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[dict]",
+      "type": "object"
+    },
+    "EditEventField_dict_str__str__": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[dict[str, str]]",
+      "type": "object"
+    },
+    "EditEventField_list_Annotated_Union_MinLengthQuestionValidation__MaxLengthQuestionValidation__RegexQuestionValidation__OrcidQuestionValidation__DoiQuestionValidation__MinNumberQuestionValidation__MaxNumberQuestionValidation__FromDateQuestionValidation__ToDateQuestionValidation__FromDateTimeQuestionValidation__ToDateTimeQuestionValidation__FromTimeQuestionValidation__ToTimeQuestionValidation__DomainQuestionValidation___FieldInfo_annotation_NoneType__required_True__discriminator__type_____": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "items": {
+                "discriminator": {
+                  "mapping": {
+                    "DoiQuestionValidation": "#/$defs/DoiQuestionValidation",
+                    "DomainQuestionValidation": "#/$defs/DomainQuestionValidation",
+                    "FromDateQuestionValidation": "#/$defs/FromDateQuestionValidation",
+                    "FromDateTimeQuestionValidation": "#/$defs/FromDateTimeQuestionValidation",
+                    "FromTimeQuestionValidation": "#/$defs/FromTimeQuestionValidation",
+                    "MaxLengthQuestionValidation": "#/$defs/MaxLengthQuestionValidation",
+                    "MaxNumberQuestionValidation": "#/$defs/MaxNumberQuestionValidation",
+                    "MinLengthQuestionValidation": "#/$defs/MinLengthQuestionValidation",
+                    "MinNumberQuestionValidation": "#/$defs/MinNumberQuestionValidation",
+                    "OrcidQuestionValidation": "#/$defs/OrcidQuestionValidation",
+                    "RegexQuestionValidation": "#/$defs/RegexQuestionValidation",
+                    "ToDateQuestionValidation": "#/$defs/ToDateQuestionValidation",
+                    "ToDateTimeQuestionValidation": "#/$defs/ToDateTimeQuestionValidation",
+                    "ToTimeQuestionValidation": "#/$defs/ToTimeQuestionValidation"
+                  },
+                  "propertyName": "type"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/MinLengthQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/MaxLengthQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/RegexQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/OrcidQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/DoiQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/MinNumberQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/MaxNumberQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/FromDateQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/ToDateQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/FromDateTimeQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/ToDateTimeQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/FromTimeQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/ToTimeQuestionValidation"
+                  },
+                  {
+                    "$ref": "#/$defs/DomainQuestionValidation"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[list[Annotated[Union[MinLengthQuestionValidation, MaxLengthQuestionValidation, RegexQuestionValidation, OrcidQuestionValidation, DoiQuestionValidation, MinNumberQuestionValidation, MaxNumberQuestionValidation, FromDateQuestionValidation, ToDateQuestionValidation, FromDateTimeQuestionValidation, ToDateTimeQuestionValidation, FromTimeQuestionValidation, ToTimeQuestionValidation, DomainQuestionValidation], FieldInfo(annotation=NoneType, required=True, discriminator='type')]]]",
+      "type": "object"
+    },
+    "EditEventField_list_KeyValue__": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/KeyValue"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[list[KeyValue]]",
+      "type": "object"
+    },
+    "EditEventField_list_MetricMeasure__": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/MetricMeasure"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[list[MetricMeasure]]",
+      "type": "object"
+    },
+    "EditEventField_list_UUID__": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[list[UUID]]",
+      "type": "object"
+    },
+    "EditEventField_list_str__": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[list[str]]",
+      "type": "object"
+    },
+    "EditEventField_str_": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "changed",
+        "value"
+      ],
+      "title": "EditEventField[str]",
+      "type": "object"
+    },
+    "EditExpertEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditExpertEvent",
+          "default": "EditExpertEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "name": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "email": {
+          "$ref": "#/$defs/EditEventField_str_"
+        }
+      },
+      "required": [
+        "annotations",
+        "name",
+        "email"
+      ],
+      "title": "EditExpertEventContent",
+      "type": "object"
+    },
+    "EditFileQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditQuestionEvent",
+          "default": "EditQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "questionType": {
+          "const": "FileQuestion",
+          "default": "FileQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "text": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "requiredPhaseUuid": {
+          "$ref": "#/$defs/EditEventField_Union_UUID__NoneType__"
+        },
+        "tagUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "expertUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "referenceUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "maxSize": {
+          "$ref": "#/$defs/EditEventField_Union_int__NoneType__"
+        },
+        "fileTypes": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "expertUuids",
+        "referenceUuids",
+        "maxSize",
+        "fileTypes"
+      ],
+      "title": "EditFileQuestionEventContent",
+      "type": "object"
+    },
+    "EditIntegrationQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditQuestionEvent",
+          "default": "EditQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "questionType": {
+          "const": "IntegrationQuestion",
+          "default": "IntegrationQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "text": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "requiredPhaseUuid": {
+          "$ref": "#/$defs/EditEventField_Union_UUID__NoneType__"
+        },
+        "tagUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "expertUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "referenceUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "integrationUuid": {
+          "$ref": "#/$defs/EditEventField_UUID_"
+        },
+        "variables": {
+          "$ref": "#/$defs/EditEventField_dict_str__str__"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "expertUuids",
+        "referenceUuids",
+        "integrationUuid",
+        "variables"
+      ],
+      "title": "EditIntegrationQuestionEventContent",
+      "type": "object"
+    },
+    "EditItemSelectQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditQuestionEvent",
+          "default": "EditQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "questionType": {
+          "const": "ItemSelectQuestion",
+          "default": "ItemSelectQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "text": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "requiredPhaseUuid": {
+          "$ref": "#/$defs/EditEventField_Union_UUID__NoneType__"
+        },
+        "tagUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "expertUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "referenceUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "listQuestionUuid": {
+          "$ref": "#/$defs/EditEventField_UUID_"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "expertUuids",
+        "referenceUuids",
+        "listQuestionUuid"
+      ],
+      "title": "EditItemSelectQuestionEventContent",
+      "type": "object"
+    },
+    "EditKnowledgeModelEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditKnowledgeModelEvent",
+          "default": "EditKnowledgeModelEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "chapterUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "integrationUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "metricUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "phaseUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "resourceCollectionUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "tagUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        }
+      },
+      "required": [
+        "annotations",
+        "chapterUuids",
+        "integrationUuids",
+        "metricUuids",
+        "phaseUuids",
+        "resourceCollectionUuids",
+        "tagUuids"
+      ],
+      "title": "EditKnowledgeModelEventContent",
+      "type": "object"
+    },
+    "EditListQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditQuestionEvent",
+          "default": "EditQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "questionType": {
+          "const": "ListQuestion",
+          "default": "ListQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "text": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "requiredPhaseUuid": {
+          "$ref": "#/$defs/EditEventField_Union_UUID__NoneType__"
+        },
+        "tagUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "expertUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "referenceUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "itemTemplateQuestionUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "expertUuids",
+        "referenceUuids",
+        "itemTemplateQuestionUuids"
+      ],
+      "title": "EditListQuestionEventContent",
+      "type": "object"
+    },
+    "EditMetricEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditMetricEvent",
+          "default": "EditMetricEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "abbreviation": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "description": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "abbreviation",
+        "description"
+      ],
+      "title": "EditMetricEventContent",
+      "type": "object"
+    },
+    "EditMultiChoiceQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditQuestionEvent",
+          "default": "EditQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "questionType": {
+          "const": "MultiChoiceQuestion",
+          "default": "MultiChoiceQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "text": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "requiredPhaseUuid": {
+          "$ref": "#/$defs/EditEventField_Union_UUID__NoneType__"
+        },
+        "tagUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "expertUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "referenceUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "choiceUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "expertUuids",
+        "referenceUuids",
+        "choiceUuids"
+      ],
+      "title": "EditMultiChoiceQuestionEventContent",
+      "type": "object"
+    },
+    "EditOptionsQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditQuestionEvent",
+          "default": "EditQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "questionType": {
+          "const": "OptionsQuestion",
+          "default": "OptionsQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "text": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "requiredPhaseUuid": {
+          "$ref": "#/$defs/EditEventField_Union_UUID__NoneType__"
+        },
+        "tagUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "expertUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "referenceUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "answerUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "expertUuids",
+        "referenceUuids",
+        "answerUuids"
+      ],
+      "title": "EditOptionsQuestionEventContent",
+      "type": "object"
+    },
+    "EditPhaseEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditPhaseEvent",
+          "default": "EditPhaseEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "description": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "description"
+      ],
+      "title": "EditPhaseEventContent",
+      "type": "object"
+    },
+    "EditPluginIntegrationEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditIntegrationEvent",
+          "default": "EditIntegrationEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "integrationType": {
+          "const": "PluginIntegration",
+          "default": "PluginIntegration",
+          "title": "Integrationtype",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "variables": {
+          "$ref": "#/$defs/EditEventField_list_str__"
+        },
+        "pluginUuid": {
+          "$ref": "#/$defs/EditEventField_UUID_"
+        },
+        "pluginIntegrationId": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "pluginIntegrationSettings": {
+          "$ref": "#/$defs/EditEventField_dict_"
+        }
+      },
+      "required": [
+        "annotations",
+        "name",
+        "variables",
+        "pluginUuid",
+        "pluginIntegrationId",
+        "pluginIntegrationSettings"
+      ],
+      "title": "EditPluginIntegrationEventContent",
+      "type": "object"
+    },
+    "EditResourceCollectionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditResourceCollectionEvent",
+          "default": "EditResourceCollectionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "resourcePageUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "resourcePageUuids"
+      ],
+      "title": "EditResourceCollectionEventContent",
+      "type": "object"
+    },
+    "EditResourcePageEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditResourcePageEvent",
+          "default": "EditResourcePageEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "content": {
+          "$ref": "#/$defs/EditEventField_str_"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "content"
+      ],
+      "title": "EditResourcePageEventContent",
+      "type": "object"
+    },
+    "EditResourcePageReferenceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditReferenceEvent",
+          "default": "EditReferenceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "referenceType": {
+          "const": "ResourcePageReference",
+          "default": "ResourcePageReference",
+          "title": "Referencetype",
+          "type": "string"
+        },
+        "resourcePageUuid": {
+          "$ref": "#/$defs/EditEventField_UUID_"
+        }
+      },
+      "required": [
+        "annotations",
+        "resourcePageUuid"
+      ],
+      "title": "EditResourcePageReferenceEventContent",
+      "type": "object"
+    },
+    "EditTagEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditTagEvent",
+          "default": "EditTagEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "name": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "description": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "color": {
+          "$ref": "#/$defs/EditEventField_str_"
+        }
+      },
+      "required": [
+        "annotations",
+        "name",
+        "description",
+        "color"
+      ],
+      "title": "EditTagEventContent",
+      "type": "object"
+    },
+    "EditURLReferenceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditReferenceEvent",
+          "default": "EditReferenceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "referenceType": {
+          "const": "URLReference",
+          "default": "URLReference",
+          "title": "Referencetype",
+          "type": "string"
+        },
+        "url": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "label": {
+          "$ref": "#/$defs/EditEventField_str_"
+        }
+      },
+      "required": [
+        "annotations",
+        "url",
+        "label"
+      ],
+      "title": "EditURLReferenceEventContent",
+      "type": "object"
+    },
+    "EditValueQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "EditQuestionEvent",
+          "default": "EditQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "annotations": {
+          "$ref": "#/$defs/EditEventField_list_KeyValue__"
+        },
+        "questionType": {
+          "const": "ValueQuestion",
+          "default": "ValueQuestion",
+          "title": "Questiontype",
+          "type": "string"
+        },
+        "title": {
+          "$ref": "#/$defs/EditEventField_str_"
+        },
+        "text": {
+          "$ref": "#/$defs/EditEventField_Union_str__NoneType__"
+        },
+        "requiredPhaseUuid": {
+          "$ref": "#/$defs/EditEventField_Union_UUID__NoneType__"
+        },
+        "tagUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "expertUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "referenceUuids": {
+          "$ref": "#/$defs/EditEventField_list_UUID__"
+        },
+        "valueType": {
+          "$ref": "#/$defs/EditEventField_Literal__StringQuestionValueType____NumberQuestionValueType____DateQuestionValueType____DateTimeQuestionValueType____TimeQuestionValueType____TextQuestionValueType____EmailQuestionValueType____UrlQuestionValueType____ColorQuestionValueType___"
+        },
+        "validations": {
+          "$ref": "#/$defs/EditEventField_list_Annotated_Union_MinLengthQuestionValidation__MaxLengthQuestionValidation__RegexQuestionValidation__OrcidQuestionValidation__DoiQuestionValidation__MinNumberQuestionValidation__MaxNumberQuestionValidation__FromDateQuestionValidation__ToDateQuestionValidation__FromDateTimeQuestionValidation__ToDateTimeQuestionValidation__FromTimeQuestionValidation__ToTimeQuestionValidation__DomainQuestionValidation___FieldInfo_annotation_NoneType__required_True__discriminator__type_____"
+        }
+      },
+      "required": [
+        "annotations",
+        "title",
+        "text",
+        "requiredPhaseUuid",
+        "tagUuids",
+        "expertUuids",
+        "referenceUuids",
+        "valueType",
+        "validations"
+      ],
+      "title": "EditValueQuestionEventContent",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "title": "Uuid",
+          "type": "string"
+        },
+        "entityUuid": {
+          "format": "uuid",
+          "title": "Entityuuid",
+          "type": "string"
+        },
+        "parentUuid": {
+          "format": "uuid",
+          "title": "Parentuuid",
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "title": "Createdat",
+          "type": "string"
+        },
+        "content": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AddKnowledgeModelEventContent"
+            },
+            {
+              "$ref": "#/$defs/EditKnowledgeModelEventContent"
+            },
+            {
+              "$ref": "#/$defs/AddChapterEventContent"
+            },
+            {
+              "$ref": "#/$defs/EditChapterEventContent"
+            },
+            {
+              "$ref": "#/$defs/DeleteChapterEventContent"
+            },
+            {
+              "discriminator": {
+                "mapping": {
+                  "FileQuestion": "#/$defs/AddFileQuestionEventContent",
+                  "IntegrationQuestion": "#/$defs/AddIntegrationQuestionEventContent",
+                  "ItemSelectQuestion": "#/$defs/AddItemSelectQuestionEventContent",
+                  "ListQuestion": "#/$defs/AddListQuestionEventContent",
+                  "MultiChoiceQuestion": "#/$defs/AddMultiChoiceQuestionEventContent",
+                  "OptionsQuestion": "#/$defs/AddOptionsQuestionEventContent",
+                  "ValueQuestion": "#/$defs/AddValueQuestionEventContent"
+                },
+                "propertyName": "questionType"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/AddOptionsQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/AddMultiChoiceQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/AddListQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/AddValueQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/AddIntegrationQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/AddItemSelectQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/AddFileQuestionEventContent"
+                }
+              ]
+            },
+            {
+              "discriminator": {
+                "mapping": {
+                  "FileQuestion": "#/$defs/EditFileQuestionEventContent",
+                  "IntegrationQuestion": "#/$defs/EditIntegrationQuestionEventContent",
+                  "ItemSelectQuestion": "#/$defs/EditItemSelectQuestionEventContent",
+                  "ListQuestion": "#/$defs/EditListQuestionEventContent",
+                  "MultiChoiceQuestion": "#/$defs/EditMultiChoiceQuestionEventContent",
+                  "OptionsQuestion": "#/$defs/EditOptionsQuestionEventContent",
+                  "ValueQuestion": "#/$defs/EditValueQuestionEventContent"
+                },
+                "propertyName": "questionType"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/EditOptionsQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/EditMultiChoiceQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/EditListQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/EditValueQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/EditIntegrationQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/EditItemSelectQuestionEventContent"
+                },
+                {
+                  "$ref": "#/$defs/EditFileQuestionEventContent"
+                }
+              ]
+            },
+            {
+              "$ref": "#/$defs/DeleteQuestionEventContent"
+            },
+            {
+              "$ref": "#/$defs/AddAnswerEventContent"
+            },
+            {
+              "$ref": "#/$defs/EditAnswerEventContent"
+            },
+            {
+              "$ref": "#/$defs/DeleteAnswerEventContent"
+            },
+            {
+              "$ref": "#/$defs/AddChoiceEventContent"
+            },
+            {
+              "$ref": "#/$defs/EditChoiceEventContent"
+            },
+            {
+              "$ref": "#/$defs/DeleteChoiceEventContent"
+            },
+            {
+              "discriminator": {
+                "mapping": {
+                  "CrossReference": "#/$defs/AddCrossReferenceEventContent",
+                  "ResourcePageReference": "#/$defs/AddResourcePageReferenceEventContent",
+                  "URLReference": "#/$defs/AddURLReferenceEventContent"
+                },
+                "propertyName": "referenceType"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/AddResourcePageReferenceEventContent"
+                },
+                {
+                  "$ref": "#/$defs/AddURLReferenceEventContent"
+                },
+                {
+                  "$ref": "#/$defs/AddCrossReferenceEventContent"
+                }
+              ]
+            },
+            {
+              "discriminator": {
+                "mapping": {
+                  "CrossReference": "#/$defs/EditCrossReferenceEventContent",
+                  "ResourcePageReference": "#/$defs/EditResourcePageReferenceEventContent",
+                  "URLReference": "#/$defs/EditURLReferenceEventContent"
+                },
+                "propertyName": "referenceType"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/EditResourcePageReferenceEventContent"
+                },
+                {
+                  "$ref": "#/$defs/EditURLReferenceEventContent"
+                },
+                {
+                  "$ref": "#/$defs/EditCrossReferenceEventContent"
+                }
+              ]
+            },
+            {
+              "$ref": "#/$defs/DeleteReferenceEventContent"
+            },
+            {
+              "$ref": "#/$defs/AddExpertEventContent"
+            },
+            {
+              "$ref": "#/$defs/EditExpertEventContent"
+            },
+            {
+              "$ref": "#/$defs/DeleteExpertEventContent"
+            },
+            {
+              "discriminator": {
+                "mapping": {
+                  "ApiIntegration": "#/$defs/AddApiIntegrationEventContent",
+                  "PluginIntegration": "#/$defs/AddPluginIntegrationEventContent"
+                },
+                "propertyName": "integrationType"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/AddApiIntegrationEventContent"
+                },
+                {
+                  "$ref": "#/$defs/AddPluginIntegrationEventContent"
+                }
+              ]
+            },
+            {
+              "discriminator": {
+                "mapping": {
+                  "ApiIntegration": "#/$defs/EditApiIntegrationEventContent",
+                  "PluginIntegration": "#/$defs/EditPluginIntegrationEventContent"
+                },
+                "propertyName": "integrationType"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/EditApiIntegrationEventContent"
+                },
+                {
+                  "$ref": "#/$defs/EditPluginIntegrationEventContent"
+                }
+              ]
+            },
+            {
+              "$ref": "#/$defs/DeleteIntegrationEventContent"
+            },
+            {
+              "$ref": "#/$defs/AddTagEventContent"
+            },
+            {
+              "$ref": "#/$defs/EditTagEventContent"
+            },
+            {
+              "$ref": "#/$defs/DeleteTagEventContent"
+            },
+            {
+              "$ref": "#/$defs/AddMetricEventContent"
+            },
+            {
+              "$ref": "#/$defs/EditMetricEventContent"
+            },
+            {
+              "$ref": "#/$defs/DeleteMetricEventContent"
+            },
+            {
+              "$ref": "#/$defs/AddPhaseEventContent"
+            },
+            {
+              "$ref": "#/$defs/EditPhaseEventContent"
+            },
+            {
+              "$ref": "#/$defs/DeletePhaseEventContent"
+            },
+            {
+              "$ref": "#/$defs/AddResourceCollectionEventContent"
+            },
+            {
+              "$ref": "#/$defs/EditResourceCollectionEventContent"
+            },
+            {
+              "$ref": "#/$defs/DeleteResourceCollectionEventContent"
+            },
+            {
+              "$ref": "#/$defs/AddResourcePageEventContent"
+            },
+            {
+              "$ref": "#/$defs/EditResourcePageEventContent"
+            },
+            {
+              "$ref": "#/$defs/DeleteResourcePageEventContent"
+            },
+            {
+              "$ref": "#/$defs/MoveQuestionEventContent"
+            },
+            {
+              "$ref": "#/$defs/MoveAnswerEventContent"
+            },
+            {
+              "$ref": "#/$defs/MoveChoiceEventContent"
+            },
+            {
+              "$ref": "#/$defs/MoveReferenceEventContent"
+            },
+            {
+              "$ref": "#/$defs/MoveExpertEventContent"
+            }
+          ],
+          "title": "Content"
+        }
+      },
+      "required": [
+        "uuid",
+        "entityUuid",
+        "parentUuid",
+        "createdAt",
+        "content"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "FromDateQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "FromDateQuestionValidation",
+          "default": "FromDateQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "FromDateQuestionValidation",
+      "type": "object"
+    },
+    "FromDateTimeQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "FromDateTimeQuestionValidation",
+          "default": "FromDateTimeQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "FromDateTimeQuestionValidation",
+      "type": "object"
+    },
+    "FromTimeQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "FromTimeQuestionValidation",
+          "default": "FromTimeQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "FromTimeQuestionValidation",
+      "type": "object"
+    },
+    "KeyValue": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "title": "KeyValue",
+      "type": "object"
+    },
+    "KnowledgeModelPackage": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kmId": {
+          "title": "Kmid",
+          "type": "string"
+        },
+        "organizationId": {
+          "title": "Organizationid",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "metamodelVersion": {
+          "title": "Metamodelversion",
+          "type": "integer"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "license": {
+          "title": "License",
+          "type": "string"
+        },
+        "readme": {
+          "title": "Readme",
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "title": "Createdat",
+          "type": "string"
+        },
+        "forkOfPackageId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Forkofpackageid"
+        },
+        "mergeCheckpointPackageId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mergecheckpointpackageid"
+        },
+        "previousPackageId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Previouspackageid"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/Event"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "nonEditable": {
+          "default": false,
+          "title": "Noneditable",
+          "type": "boolean"
+        },
+        "phase": {
+          "title": "Phase",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kmId",
+        "organizationId",
+        "version",
+        "name",
+        "metamodelVersion",
+        "description",
+        "license",
+        "readme",
+        "createdAt",
+        "forkOfPackageId",
+        "mergeCheckpointPackageId",
+        "previousPackageId",
+        "events",
+        "phase"
+      ],
+      "title": "KnowledgeModelPackage",
+      "type": "object"
+    },
+    "MaxLengthQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "MaxLengthQuestionValidation",
+          "default": "MaxLengthQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "MaxLengthQuestionValidation",
+      "type": "object"
+    },
+    "MaxNumberQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "MaxNumberQuestionValidation",
+          "default": "MaxNumberQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "MaxNumberQuestionValidation",
+      "type": "object"
+    },
+    "MetricMeasure": {
+      "additionalProperties": false,
+      "properties": {
+        "metricUuid": {
+          "format": "uuid",
+          "title": "Metricuuid",
+          "type": "string"
+        },
+        "measure": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Measure",
+          "type": "number"
+        },
+        "weight": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Weight",
+          "type": "number"
+        }
+      },
+      "required": [
+        "metricUuid",
+        "measure",
+        "weight"
+      ],
+      "title": "MetricMeasure",
+      "type": "object"
+    },
+    "MinLengthQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "MinLengthQuestionValidation",
+          "default": "MinLengthQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "MinLengthQuestionValidation",
+      "type": "object"
+    },
+    "MinNumberQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "MinNumberQuestionValidation",
+          "default": "MinNumberQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "MinNumberQuestionValidation",
+      "type": "object"
+    },
+    "MoveAnswerEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "MoveAnswerEvent",
+          "default": "MoveAnswerEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "targetUuid": {
+          "format": "uuid",
+          "title": "Targetuuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "targetUuid"
+      ],
+      "title": "MoveAnswerEventContent",
+      "type": "object"
+    },
+    "MoveChoiceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "MoveChoiceEvent",
+          "default": "MoveChoiceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "targetUuid": {
+          "format": "uuid",
+          "title": "Targetuuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "targetUuid"
+      ],
+      "title": "MoveChoiceEventContent",
+      "type": "object"
+    },
+    "MoveExpertEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "MoveExpertEvent",
+          "default": "MoveExpertEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "targetUuid": {
+          "format": "uuid",
+          "title": "Targetuuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "targetUuid"
+      ],
+      "title": "MoveExpertEventContent",
+      "type": "object"
+    },
+    "MoveQuestionEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "MoveQuestionEvent",
+          "default": "MoveQuestionEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "targetUuid": {
+          "format": "uuid",
+          "title": "Targetuuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "targetUuid"
+      ],
+      "title": "MoveQuestionEventContent",
+      "type": "object"
+    },
+    "MoveReferenceEventContent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventType": {
+          "const": "MoveReferenceEvent",
+          "default": "MoveReferenceEvent",
+          "title": "Eventtype",
+          "type": "string"
+        },
+        "targetUuid": {
+          "format": "uuid",
+          "title": "Targetuuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "targetUuid"
+      ],
+      "title": "MoveReferenceEventContent",
+      "type": "object"
+    },
+    "OrcidQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "OrcidQuestionValidation",
+          "default": "OrcidQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "OrcidQuestionValidation",
+      "type": "object"
+    },
+    "RegexQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "RegexQuestionValidation",
+          "default": "RegexQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "RegexQuestionValidation",
+      "type": "object"
+    },
+    "RemoteErrorTypeHintResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "responseType": {
+          "const": "RemoteErrorTypeHintResponse",
+          "default": "RemoteErrorTypeHintResponse",
+          "title": "Responsetype",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "integer"
+        },
+        "contentType": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Contenttype"
+        },
+        "body": {
+          "title": "Body",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "contentType",
+        "body"
+      ],
+      "title": "RemoteErrorTypeHintResponse",
+      "type": "object"
+    },
+    "RequestFailedTypeHintResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "responseType": {
+          "const": "RequestFailedTypeHintResponse",
+          "default": "RequestFailedTypeHintResponse",
+          "title": "Responsetype",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "title": "RequestFailedTypeHintResponse",
+      "type": "object"
+    },
+    "SuccessTypeHintResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "responseType": {
+          "const": "SuccessTypeHintResponse",
+          "default": "SuccessTypeHintResponse",
+          "title": "Responsetype",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "integer"
+        },
+        "contentType": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Contenttype"
+        },
+        "body": {
+          "title": "Body",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "contentType",
+        "body"
+      ],
+      "title": "SuccessTypeHintResponse",
+      "type": "object"
+    },
+    "ToDateQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "ToDateQuestionValidation",
+          "default": "ToDateQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "ToDateQuestionValidation",
+      "type": "object"
+    },
+    "ToDateTimeQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "ToDateTimeQuestionValidation",
+          "default": "ToDateTimeQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "ToDateTimeQuestionValidation",
+      "type": "object"
+    },
+    "ToTimeQuestionValidation": {
+      "properties": {
+        "type": {
+          "const": "ToTimeQuestionValidation",
+          "default": "ToTimeQuestionValidation",
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "ToTimeQuestionValidation",
+      "type": "object"
+    },
+    "TypeHintExchange": {
+      "additionalProperties": false,
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/TypeHintRequest"
+        },
+        "response": {
+          "discriminator": {
+            "mapping": {
+              "RemoteErrorTypeHintResponse": "#/$defs/RemoteErrorTypeHintResponse",
+              "RequestFailedTypeHintResponse": "#/$defs/RequestFailedTypeHintResponse",
+              "SuccessTypeHintResponse": "#/$defs/SuccessTypeHintResponse"
+            },
+            "propertyName": "responseType"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SuccessTypeHintResponse"
+            },
+            {
+              "$ref": "#/$defs/RemoteErrorTypeHintResponse"
+            },
+            {
+              "$ref": "#/$defs/RequestFailedTypeHintResponse"
+            }
+          ],
+          "title": "Response"
+        }
+      },
+      "required": [
+        "request",
+        "response"
+      ],
+      "title": "TypeHintExchange",
+      "type": "object"
+    },
+    "TypeHintRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "title": "Method",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "headers": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "title": "Headers",
+          "type": "array"
+        },
+        "body": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Body"
+        }
+      },
+      "required": [
+        "method",
+        "url",
+        "headers",
+        "body"
+      ],
+      "title": "TypeHintRequest",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "kmId": {
+      "title": "Kmid",
+      "type": "string"
+    },
+    "organizationId": {
+      "title": "Organizationid",
+      "type": "string"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    },
+    "metamodelVersion": {
+      "title": "Metamodelversion",
+      "type": "integer"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "packages": {
+      "items": {
+        "$ref": "#/$defs/KnowledgeModelPackage"
+      },
+      "title": "Packages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "kmId",
+    "organizationId",
+    "version",
+    "metamodelVersion",
+    "name",
+    "packages"
+  ],
+  "title": "KnowledgeModelPackageBundle",
+  "type": "object"
+}
