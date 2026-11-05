@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Document Template Descriptor (local)",
+  "$comment": "Document template metamodel version 19.0",
+  "additionalProperties": false,
+  "description": "Local ``template.json``; the README lives in its own file.",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "license": {
+      "type": "string"
+    },
+    "metamodelVersion": {
+      "pattern": "^\\d+(\\.\\d+)?$",
+      "type": "string"
+    },
+    "language": {
+      "default": "en",
+      "type": "string"
+    },
+    "allowedPackages": {
+      "items": {
+        "$ref": "#/$defs/PackagePattern"
+      },
+      "type": "array"
+    },
+    "formats": {
+      "items": {
+        "$ref": "#/$defs/Format"
+      },
+      "type": "array"
+    },
+    "_tdk": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TDKConfig"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "id",
+    "version",
+    "name",
+    "description",
+    "license",
+    "metamodelVersion"
+  ],
+  "type": "object",
+  "$defs": {
+    "Format": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/FormatStep"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "icon"
+      ],
+      "title": "Format",
+      "type": "object"
+    },
+    "FormatStep": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "options": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "FormatStep",
+      "type": "object"
+    },
+    "PackagePattern": {
+      "additionalProperties": false,
+      "description": "Knowledge model packages a template can be used with; ``None`` matches any.",
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "minVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "maxVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "options": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "PackagePattern",
+      "type": "object"
+    },
+    "TDKConfig": {
+      "additionalProperties": false,
+      "description": "The ``_tdk`` section of a local descriptor.",
+      "properties": {
+        "version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "readmeFile": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "files": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "TDKConfig",
+      "type": "object"
+    }
+  }
+}

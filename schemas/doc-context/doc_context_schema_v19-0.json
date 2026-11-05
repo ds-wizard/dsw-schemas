@@ -1,0 +1,3383 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Document Context",
+  "$comment": "Document template metamodel version 19.0",
+  "additionalProperties": false,
+  "properties": {
+    "metamodelVersion": {
+      "pattern": "^\\d+(\\.\\d+)?$",
+      "type": "string"
+    },
+    "hash": {
+      "type": "string"
+    },
+    "workspace": {
+      "$ref": "#/$defs/Workspace"
+    },
+    "project": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Project"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "knowledgeModelEditor": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/KnowledgeModelEditor"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "questionnaire": {
+      "$ref": "#/$defs/Questionnaire"
+    },
+    "knowledgeModel": {
+      "$ref": "#/$defs/KnowledgeModel"
+    },
+    "knowledgeModelPackage": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/KnowledgeModelPackage"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "document": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Document"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "config": {
+      "$ref": "#/$defs/Config"
+    }
+  },
+  "required": [
+    "metamodelVersion",
+    "hash",
+    "workspace",
+    "questionnaire",
+    "knowledgeModel",
+    "config"
+  ],
+  "type": "object",
+  "$defs": {
+    "Answer": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "label": {
+          "type": "string"
+        },
+        "advice": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "followUpUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "metricMeasures": {
+          "items": {
+            "$ref": "#/$defs/MetricMeasure"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "uuid",
+        "label"
+      ],
+      "title": "Answer",
+      "type": "object"
+    },
+    "AnswerReplyValue": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "AnswerReply",
+          "default": "AnswerReply",
+          "type": "string"
+        },
+        "value": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "AnswerReplyValue",
+      "type": "object"
+    },
+    "AnsweredIndication": {
+      "additionalProperties": false,
+      "properties": {
+        "indicationType": {
+          "const": "AnsweredIndication",
+          "default": "AnsweredIndication",
+          "type": "string"
+        },
+        "answeredQuestions": {
+          "type": "integer"
+        },
+        "unansweredQuestions": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "answeredQuestions",
+        "unansweredQuestions"
+      ],
+      "title": "AnsweredIndication",
+      "type": "object"
+    },
+    "ApiIntegration": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "integrationType": {
+          "const": "ApiIntegration",
+          "default": "ApiIntegration",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "variables": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "allowCustomReply": {
+          "type": "boolean"
+        },
+        "requestMethod": {
+          "type": "string"
+        },
+        "requestUrl": {
+          "type": "string"
+        },
+        "requestHeaders": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "requestBody": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "requestAllowEmptySearch": {
+          "type": "boolean"
+        },
+        "responseListField": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "responseItemTemplate": {
+          "type": "string"
+        },
+        "responseItemTemplateForSelection": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "testQ": {
+          "type": "string"
+        },
+        "testVariables": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "testResponse": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TypeHintExchange"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "allowCustomReply",
+        "requestMethod",
+        "requestUrl",
+        "requestAllowEmptySearch",
+        "responseItemTemplate",
+        "testQ"
+      ],
+      "title": "ApiIntegration",
+      "type": "object"
+    },
+    "Chapter": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "questionUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "uuid",
+        "title"
+      ],
+      "title": "Chapter",
+      "type": "object"
+    },
+    "ChapterReport": {
+      "additionalProperties": false,
+      "properties": {
+        "chapterUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "indications": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "AnsweredIndication": "#/$defs/AnsweredIndication",
+                "PhasesAnsweredIndication": "#/$defs/PhasesAnsweredIndication"
+              },
+              "propertyName": "indicationType"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/AnsweredIndication"
+              },
+              {
+                "$ref": "#/$defs/PhasesAnsweredIndication"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "metrics": {
+          "items": {
+            "$ref": "#/$defs/MetricSummary"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "chapterUuid",
+        "indications",
+        "metrics"
+      ],
+      "title": "ChapterReport",
+      "type": "object"
+    },
+    "Choice": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "label"
+      ],
+      "title": "Choice",
+      "type": "object"
+    },
+    "Config": {
+      "additionalProperties": false,
+      "description": "Effective look and feel of the workspace.",
+      "properties": {
+        "clientUrl": {
+          "type": "string"
+        },
+        "appTitle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "primaryColor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "logoUrl": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "clientUrl"
+      ],
+      "title": "Config",
+      "type": "object"
+    },
+    "CrossReference": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "referenceType": {
+          "const": "CrossReference",
+          "default": "CrossReference",
+          "type": "string"
+        },
+        "targetUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "targetUuid",
+        "description"
+      ],
+      "title": "CrossReference",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "documentTemplate": {
+          "$ref": "#/$defs/DocumentTemplate"
+        },
+        "format": {
+          "$ref": "#/$defs/DocumentFormat"
+        },
+        "language": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "locale": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocumentTemplateLocale"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "preview": {
+          "type": "boolean"
+        },
+        "eventUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "createdBy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/User"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "documentTemplate",
+        "format",
+        "preview",
+        "createdAt"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "DocumentFormat": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "name"
+      ],
+      "title": "DocumentFormat",
+      "type": "object"
+    },
+    "DocumentTemplate": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "workspaceUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "uuid",
+        "id",
+        "version"
+      ],
+      "title": "DocumentTemplate",
+      "type": "object"
+    },
+    "DocumentTemplateLocale": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "code",
+        "createdAt",
+        "updatedAt"
+      ],
+      "title": "DocumentTemplateLocale",
+      "type": "object"
+    },
+    "DoiQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "DoiQuestionValidation",
+          "default": "DoiQuestionValidation",
+          "type": "string"
+        }
+      },
+      "title": "DoiQuestionValidation",
+      "type": "object"
+    },
+    "DomainQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "DomainQuestionValidation",
+          "default": "DomainQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "DomainQuestionValidation",
+      "type": "object"
+    },
+    "Expert": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "email"
+      ],
+      "title": "Expert",
+      "type": "object"
+    },
+    "FileQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "expertUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "referenceUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "questionType": {
+          "const": "FileQuestion",
+          "default": "FileQuestion",
+          "type": "string"
+        },
+        "maxSize": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fileTypes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "uuid",
+        "title"
+      ],
+      "title": "FileQuestion",
+      "type": "object"
+    },
+    "FileReplyValue": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "FileReply",
+          "default": "FileReply",
+          "type": "string"
+        },
+        "value": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "FileReplyValue",
+      "type": "object"
+    },
+    "FromDateQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "FromDateQuestionValidation",
+          "default": "FromDateQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "FromDateQuestionValidation",
+      "type": "object"
+    },
+    "FromDateTimeQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "FromDateTimeQuestionValidation",
+          "default": "FromDateTimeQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "FromDateTimeQuestionValidation",
+      "type": "object"
+    },
+    "FromTimeQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "FromTimeQuestionValidation",
+          "default": "FromTimeQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "FromTimeQuestionValidation",
+      "type": "object"
+    },
+    "IntegrationQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "expertUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "referenceUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "questionType": {
+          "const": "IntegrationQuestion",
+          "default": "IntegrationQuestion",
+          "type": "string"
+        },
+        "integrationUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "variables": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "uuid",
+        "title",
+        "integrationUuid"
+      ],
+      "title": "IntegrationQuestion",
+      "type": "object"
+    },
+    "IntegrationReplyType": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "IntegrationType",
+          "default": "IntegrationType",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "raw": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "required": [
+        "value",
+        "raw"
+      ],
+      "title": "IntegrationReplyType",
+      "type": "object"
+    },
+    "IntegrationReplyValue": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "IntegrationReply",
+          "default": "IntegrationReply",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "IntegrationType": "#/$defs/IntegrationReplyType",
+              "PlainType": "#/$defs/PlainIntegrationReplyType"
+            },
+            "propertyName": "type"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PlainIntegrationReplyType"
+            },
+            {
+              "$ref": "#/$defs/IntegrationReplyType"
+            }
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "IntegrationReplyValue",
+      "type": "object"
+    },
+    "ItemListReplyValue": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "ItemListReply",
+          "default": "ItemListReply",
+          "type": "string"
+        },
+        "value": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "ItemListReplyValue",
+      "type": "object"
+    },
+    "ItemSelectQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "expertUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "referenceUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "questionType": {
+          "const": "ItemSelectQuestion",
+          "default": "ItemSelectQuestion",
+          "type": "string"
+        },
+        "listQuestionUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "uuid",
+        "title"
+      ],
+      "title": "ItemSelectQuestion",
+      "type": "object"
+    },
+    "ItemSelectReplyValue": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "ItemSelectReply",
+          "default": "ItemSelectReply",
+          "type": "string"
+        },
+        "value": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "ItemSelectReplyValue",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "KeyValue": {
+      "additionalProperties": false,
+      "description": "Backend ``MapEntry``, used for annotations and HTTP headers.",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "title": "KeyValue",
+      "type": "object"
+    },
+    "KnowledgeModel": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "chapterUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "integrationUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "metricUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "phaseUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "resourceCollectionUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "entities": {
+          "$ref": "#/$defs/KnowledgeModelEntities"
+        }
+      },
+      "required": [
+        "uuid"
+      ],
+      "title": "KnowledgeModel",
+      "type": "object"
+    },
+    "KnowledgeModelEditor": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "createdBy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/User"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "readme": {
+          "type": "string"
+        },
+        "previousPackageUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "previousPackageId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "previousPackageVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "knowledgeModelMetamodelVersion": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "description",
+        "createdAt",
+        "updatedAt",
+        "id",
+        "version",
+        "license",
+        "readme",
+        "knowledgeModelMetamodelVersion"
+      ],
+      "title": "KnowledgeModelEditor",
+      "type": "object"
+    },
+    "KnowledgeModelEntities": {
+      "additionalProperties": false,
+      "properties": {
+        "chapters": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Chapter"
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "questions": {
+          "additionalProperties": {
+            "discriminator": {
+              "mapping": {
+                "FileQuestion": "#/$defs/FileQuestion",
+                "IntegrationQuestion": "#/$defs/IntegrationQuestion",
+                "ItemSelectQuestion": "#/$defs/ItemSelectQuestion",
+                "ListQuestion": "#/$defs/ListQuestion",
+                "MultiChoiceQuestion": "#/$defs/MultiChoiceQuestion",
+                "OptionsQuestion": "#/$defs/OptionsQuestion",
+                "ValueQuestion": "#/$defs/ValueQuestion"
+              },
+              "propertyName": "questionType"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/OptionsQuestion"
+              },
+              {
+                "$ref": "#/$defs/MultiChoiceQuestion"
+              },
+              {
+                "$ref": "#/$defs/ListQuestion"
+              },
+              {
+                "$ref": "#/$defs/ValueQuestion"
+              },
+              {
+                "$ref": "#/$defs/IntegrationQuestion"
+              },
+              {
+                "$ref": "#/$defs/ItemSelectQuestion"
+              },
+              {
+                "$ref": "#/$defs/FileQuestion"
+              }
+            ]
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "answers": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Answer"
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "choices": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Choice"
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "experts": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Expert"
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "references": {
+          "additionalProperties": {
+            "discriminator": {
+              "mapping": {
+                "CrossReference": "#/$defs/CrossReference",
+                "ResourcePageReference": "#/$defs/ResourcePageReference",
+                "URLReference": "#/$defs/URLReference"
+              },
+              "propertyName": "referenceType"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ResourcePageReference"
+              },
+              {
+                "$ref": "#/$defs/URLReference"
+              },
+              {
+                "$ref": "#/$defs/CrossReference"
+              }
+            ]
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "integrations": {
+          "additionalProperties": {
+            "discriminator": {
+              "mapping": {
+                "ApiIntegration": "#/$defs/ApiIntegration",
+                "PluginIntegration": "#/$defs/PluginIntegration"
+              },
+              "propertyName": "integrationType"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ApiIntegration"
+              },
+              {
+                "$ref": "#/$defs/PluginIntegration"
+              }
+            ]
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "tags": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Tag"
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "metrics": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Metric"
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "phases": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Phase"
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "resourceCollections": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ResourceCollection"
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        },
+        "resourcePages": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ResourcePage"
+          },
+          "propertyNames": {
+            "format": "uuid"
+          },
+          "type": "object"
+        }
+      },
+      "title": "KnowledgeModelEntities",
+      "type": "object"
+    },
+    "KnowledgeModelPackage": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "workspaceUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "uuid",
+        "id",
+        "version",
+        "name",
+        "description",
+        "language",
+        "createdAt"
+      ],
+      "title": "KnowledgeModelPackage",
+      "type": "object"
+    },
+    "ListQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "expertUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "referenceUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "questionType": {
+          "const": "ListQuestion",
+          "default": "ListQuestion",
+          "type": "string"
+        },
+        "itemTemplateQuestionUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "uuid",
+        "title"
+      ],
+      "title": "ListQuestion",
+      "type": "object"
+    },
+    "MaxLengthQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "MaxLengthQuestionValidation",
+          "default": "MaxLengthQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "MaxLengthQuestionValidation",
+      "type": "object"
+    },
+    "MaxNumberQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "MaxNumberQuestionValidation",
+          "default": "MaxNumberQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "MaxNumberQuestionValidation",
+      "type": "object"
+    },
+    "Metric": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "abbreviation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "uuid",
+        "title"
+      ],
+      "title": "Metric",
+      "type": "object"
+    },
+    "MetricMeasure": {
+      "additionalProperties": false,
+      "properties": {
+        "metricUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "measure": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "metricUuid",
+        "measure",
+        "weight"
+      ],
+      "title": "MetricMeasure",
+      "type": "object"
+    },
+    "MetricSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "metricUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "measure": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "metricUuid"
+      ],
+      "title": "MetricSummary",
+      "type": "object"
+    },
+    "MinLengthQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "MinLengthQuestionValidation",
+          "default": "MinLengthQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "MinLengthQuestionValidation",
+      "type": "object"
+    },
+    "MinNumberQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "MinNumberQuestionValidation",
+          "default": "MinNumberQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "MinNumberQuestionValidation",
+      "type": "object"
+    },
+    "MultiChoiceQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "expertUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "referenceUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "questionType": {
+          "const": "MultiChoiceQuestion",
+          "default": "MultiChoiceQuestion",
+          "type": "string"
+        },
+        "choiceUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "uuid",
+        "title"
+      ],
+      "title": "MultiChoiceQuestion",
+      "type": "object"
+    },
+    "MultiChoiceReplyValue": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "MultiChoiceReply",
+          "default": "MultiChoiceReply",
+          "type": "string"
+        },
+        "value": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "MultiChoiceReplyValue",
+      "type": "object"
+    },
+    "OptionsQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "expertUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "referenceUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "questionType": {
+          "const": "OptionsQuestion",
+          "default": "OptionsQuestion",
+          "type": "string"
+        },
+        "answerUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "uuid",
+        "title"
+      ],
+      "title": "OptionsQuestion",
+      "type": "object"
+    },
+    "OrcidQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "OrcidQuestionValidation",
+          "default": "OrcidQuestionValidation",
+          "type": "string"
+        }
+      },
+      "title": "OrcidQuestionValidation",
+      "type": "object"
+    },
+    "Phase": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "uuid",
+        "title"
+      ],
+      "title": "Phase",
+      "type": "object"
+    },
+    "PhasesAnsweredIndication": {
+      "additionalProperties": false,
+      "properties": {
+        "indicationType": {
+          "const": "PhasesAnsweredIndication",
+          "default": "PhasesAnsweredIndication",
+          "type": "string"
+        },
+        "answeredQuestions": {
+          "type": "integer"
+        },
+        "unansweredQuestions": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "answeredQuestions",
+        "unansweredQuestions"
+      ],
+      "title": "PhasesAnsweredIndication",
+      "type": "object"
+    },
+    "PlainIntegrationReplyType": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "PlainType",
+          "default": "PlainType",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "PlainIntegrationReplyType",
+      "type": "object"
+    },
+    "PluginIntegration": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "integrationType": {
+          "const": "PluginIntegration",
+          "default": "PluginIntegration",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pluginUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "pluginIntegrationId": {
+          "type": "string"
+        },
+        "pluginIntegrationSettings": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "pluginUuid",
+        "pluginIntegrationId",
+        "pluginIntegrationSettings"
+      ],
+      "title": "PluginIntegration",
+      "type": "object"
+    },
+    "Project": {
+      "additionalProperties": false,
+      "description": "Metadata of the project; its content is in :class:`Questionnaire`.",
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "createdBy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/User"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "visibility": {
+          "enum": [
+            "PrivateProjectVisibility",
+            "VisibleViewProjectVisibility",
+            "VisibleCommentProjectVisibility",
+            "VisibleEditProjectVisibility"
+          ],
+          "type": "string"
+        },
+        "sharing": {
+          "enum": [
+            "RestrictedProjectSharing",
+            "AnyoneWithLinkViewProjectSharing",
+            "AnyoneWithLinkCommentProjectSharing",
+            "AnyoneWithLinkEditProjectSharing"
+          ],
+          "type": "string"
+        },
+        "isTemplate": {
+          "type": "boolean"
+        },
+        "knowledgeModelPackageUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "selectedQuestionTagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "projectTags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "documentTemplateUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "formatUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "users": {
+          "items": {
+            "$ref": "#/$defs/UserPermission"
+          },
+          "type": "array"
+        },
+        "groups": {
+          "items": {
+            "$ref": "#/$defs/UserGroupPermission"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "createdAt",
+        "updatedAt",
+        "visibility",
+        "sharing",
+        "isTemplate",
+        "knowledgeModelPackageUuid",
+        "selectedQuestionTagUuids",
+        "projectTags",
+        "users",
+        "groups"
+      ],
+      "title": "Project",
+      "type": "object"
+    },
+    "ProjectFile": {
+      "additionalProperties": false,
+      "description": "Backend ``ProjectFileSimple``, as used by the API and document context.",
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "fileSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "uuid",
+        "fileName",
+        "contentType",
+        "fileSize"
+      ],
+      "title": "ProjectFile",
+      "type": "object"
+    },
+    "ProjectVersion": {
+      "additionalProperties": false,
+      "description": "Named pointer to a project event (backend ``ProjectVersionList``).",
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "eventUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "createdBy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UserSuggestion"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "eventUuid",
+        "createdAt",
+        "updatedAt"
+      ],
+      "title": "ProjectVersion",
+      "type": "object"
+    },
+    "Questionnaire": {
+      "additionalProperties": false,
+      "description": "Content of the project, or of the preview questionnaire of a KM editor.",
+      "properties": {
+        "replies": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Reply"
+          },
+          "type": "object"
+        },
+        "labels": {
+          "additionalProperties": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        },
+        "phaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "versionUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "versions": {
+          "items": {
+            "$ref": "#/$defs/ProjectVersion"
+          },
+          "type": "array"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/ProjectFile"
+          },
+          "type": "array"
+        },
+        "report": {
+          "$ref": "#/$defs/QuestionnaireReport"
+        },
+        "language": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "replies",
+        "labels",
+        "versions",
+        "files",
+        "report"
+      ],
+      "title": "Questionnaire",
+      "type": "object"
+    },
+    "QuestionnaireReport": {
+      "additionalProperties": false,
+      "description": "The project report without its generated uuid and timestamps, which would break the hash.",
+      "properties": {
+        "totalReport": {
+          "$ref": "#/$defs/TotalReport"
+        },
+        "chapterReports": {
+          "items": {
+            "$ref": "#/$defs/ChapterReport"
+          },
+          "type": "array"
+        },
+        "chapters": {
+          "items": {
+            "$ref": "#/$defs/Chapter"
+          },
+          "type": "array"
+        },
+        "metrics": {
+          "items": {
+            "$ref": "#/$defs/Metric"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "totalReport",
+        "chapterReports",
+        "chapters",
+        "metrics"
+      ],
+      "title": "QuestionnaireReport",
+      "type": "object"
+    },
+    "RegexQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "RegexQuestionValidation",
+          "default": "RegexQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "RegexQuestionValidation",
+      "type": "object"
+    },
+    "RemoteErrorTypeHintResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "responseType": {
+          "const": "RemoteErrorTypeHintResponse",
+          "default": "RemoteErrorTypeHintResponse",
+          "type": "string"
+        },
+        "status": {
+          "type": "integer"
+        },
+        "contentType": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "body"
+      ],
+      "title": "RemoteErrorTypeHintResponse",
+      "type": "object"
+    },
+    "Reply": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "AnswerReply": "#/$defs/AnswerReplyValue",
+              "FileReply": "#/$defs/FileReplyValue",
+              "IntegrationReply": "#/$defs/IntegrationReplyValue",
+              "ItemListReply": "#/$defs/ItemListReplyValue",
+              "ItemSelectReply": "#/$defs/ItemSelectReplyValue",
+              "MultiChoiceReply": "#/$defs/MultiChoiceReplyValue",
+              "StringReply": "#/$defs/StringReplyValue"
+            },
+            "propertyName": "type"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/StringReplyValue"
+            },
+            {
+              "$ref": "#/$defs/AnswerReplyValue"
+            },
+            {
+              "$ref": "#/$defs/MultiChoiceReplyValue"
+            },
+            {
+              "$ref": "#/$defs/ItemListReplyValue"
+            },
+            {
+              "$ref": "#/$defs/IntegrationReplyValue"
+            },
+            {
+              "$ref": "#/$defs/ItemSelectReplyValue"
+            },
+            {
+              "$ref": "#/$defs/FileReplyValue"
+            }
+          ]
+        },
+        "createdBy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UserSuggestion"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "createdAt"
+      ],
+      "title": "Reply",
+      "type": "object"
+    },
+    "RequestFailedTypeHintResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "responseType": {
+          "const": "RequestFailedTypeHintResponse",
+          "default": "RequestFailedTypeHintResponse",
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "title": "RequestFailedTypeHintResponse",
+      "type": "object"
+    },
+    "ResourceCollection": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "resourcePageUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "uuid",
+        "title"
+      ],
+      "title": "ResourceCollection",
+      "type": "object"
+    },
+    "ResourcePage": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "title",
+        "content"
+      ],
+      "title": "ResourcePage",
+      "type": "object"
+    },
+    "ResourcePageReference": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "referenceType": {
+          "const": "ResourcePageReference",
+          "default": "ResourcePageReference",
+          "type": "string"
+        },
+        "resourcePageUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "uuid"
+      ],
+      "title": "ResourcePageReference",
+      "type": "object"
+    },
+    "StringReplyValue": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "StringReply",
+          "default": "StringReply",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "StringReplyValue",
+      "type": "object"
+    },
+    "SuccessTypeHintResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "responseType": {
+          "const": "SuccessTypeHintResponse",
+          "default": "SuccessTypeHintResponse",
+          "type": "string"
+        },
+        "status": {
+          "type": "integer"
+        },
+        "contentType": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "body"
+      ],
+      "title": "SuccessTypeHintResponse",
+      "type": "object"
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "color": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "color"
+      ],
+      "title": "Tag",
+      "type": "object"
+    },
+    "ToDateQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "ToDateQuestionValidation",
+          "default": "ToDateQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "ToDateQuestionValidation",
+      "type": "object"
+    },
+    "ToDateTimeQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "ToDateTimeQuestionValidation",
+          "default": "ToDateTimeQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "ToDateTimeQuestionValidation",
+      "type": "object"
+    },
+    "ToTimeQuestionValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "ToTimeQuestionValidation",
+          "default": "ToTimeQuestionValidation",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "ToTimeQuestionValidation",
+      "type": "object"
+    },
+    "TotalReport": {
+      "additionalProperties": false,
+      "properties": {
+        "indications": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "AnsweredIndication": "#/$defs/AnsweredIndication",
+                "PhasesAnsweredIndication": "#/$defs/PhasesAnsweredIndication"
+              },
+              "propertyName": "indicationType"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/AnsweredIndication"
+              },
+              {
+                "$ref": "#/$defs/PhasesAnsweredIndication"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "metrics": {
+          "items": {
+            "$ref": "#/$defs/MetricSummary"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "indications",
+        "metrics"
+      ],
+      "title": "TotalReport",
+      "type": "object"
+    },
+    "TypeHintExchange": {
+      "additionalProperties": false,
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/TypeHintRequest"
+        },
+        "response": {
+          "discriminator": {
+            "mapping": {
+              "RemoteErrorTypeHintResponse": "#/$defs/RemoteErrorTypeHintResponse",
+              "RequestFailedTypeHintResponse": "#/$defs/RequestFailedTypeHintResponse",
+              "SuccessTypeHintResponse": "#/$defs/SuccessTypeHintResponse"
+            },
+            "propertyName": "responseType"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SuccessTypeHintResponse"
+            },
+            {
+              "$ref": "#/$defs/RemoteErrorTypeHintResponse"
+            },
+            {
+              "$ref": "#/$defs/RequestFailedTypeHintResponse"
+            }
+          ]
+        }
+      },
+      "required": [
+        "request",
+        "response"
+      ],
+      "title": "TypeHintExchange",
+      "type": "object"
+    },
+    "TypeHintRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "headers": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "body": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "method",
+        "url",
+        "headers"
+      ],
+      "title": "TypeHintRequest",
+      "type": "object"
+    },
+    "URLReference": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "referenceType": {
+          "const": "URLReference",
+          "default": "URLReference",
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "url",
+        "label"
+      ],
+      "title": "URLReference",
+      "type": "object"
+    },
+    "User": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "affiliation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "imageUrl": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "firstName",
+        "lastName",
+        "email",
+        "active",
+        "createdAt",
+        "updatedAt"
+      ],
+      "title": "User",
+      "type": "object"
+    },
+    "UserGroup": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "private": {
+          "type": "boolean"
+        },
+        "members": {
+          "items": {
+            "$ref": "#/$defs/UserGroupMember"
+          },
+          "type": "array"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "private",
+        "members",
+        "createdAt",
+        "updatedAt"
+      ],
+      "title": "UserGroup",
+      "type": "object"
+    },
+    "UserGroupMember": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "gravatarHash": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "affiliation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "membershipType": {
+          "enum": [
+            "OwnerUserGroupMembershipType",
+            "MemberUserGroupMembershipType"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "firstName",
+        "lastName",
+        "gravatarHash",
+        "membershipType"
+      ],
+      "title": "UserGroupMember",
+      "type": "object"
+    },
+    "UserGroupPermission": {
+      "additionalProperties": false,
+      "properties": {
+        "group": {
+          "$ref": "#/$defs/UserGroup"
+        },
+        "perms": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "group",
+        "perms"
+      ],
+      "title": "UserGroupPermission",
+      "type": "object"
+    },
+    "UserPermission": {
+      "additionalProperties": false,
+      "properties": {
+        "user": {
+          "$ref": "#/$defs/User"
+        },
+        "perms": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "user",
+        "perms"
+      ],
+      "title": "UserPermission",
+      "type": "object"
+    },
+    "UserSuggestion": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "gravatarHash": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "affiliation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "uuid",
+        "firstName",
+        "lastName",
+        "gravatarHash"
+      ],
+      "title": "UserSuggestion",
+      "type": "object"
+    },
+    "ValueQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/KeyValue"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "requiredPhaseUuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tagUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "expertUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "referenceUuids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "questionType": {
+          "const": "ValueQuestion",
+          "default": "ValueQuestion",
+          "type": "string"
+        },
+        "valueType": {
+          "default": "StringQuestionValueType",
+          "enum": [
+            "StringQuestionValueType",
+            "NumberQuestionValueType",
+            "DateQuestionValueType",
+            "DateTimeQuestionValueType",
+            "TimeQuestionValueType",
+            "TextQuestionValueType",
+            "EmailQuestionValueType",
+            "UrlQuestionValueType",
+            "ColorQuestionValueType"
+          ],
+          "type": "string"
+        },
+        "validations": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "DoiQuestionValidation": "#/$defs/DoiQuestionValidation",
+                "DomainQuestionValidation": "#/$defs/DomainQuestionValidation",
+                "FromDateQuestionValidation": "#/$defs/FromDateQuestionValidation",
+                "FromDateTimeQuestionValidation": "#/$defs/FromDateTimeQuestionValidation",
+                "FromTimeQuestionValidation": "#/$defs/FromTimeQuestionValidation",
+                "MaxLengthQuestionValidation": "#/$defs/MaxLengthQuestionValidation",
+                "MaxNumberQuestionValidation": "#/$defs/MaxNumberQuestionValidation",
+                "MinLengthQuestionValidation": "#/$defs/MinLengthQuestionValidation",
+                "MinNumberQuestionValidation": "#/$defs/MinNumberQuestionValidation",
+                "OrcidQuestionValidation": "#/$defs/OrcidQuestionValidation",
+                "RegexQuestionValidation": "#/$defs/RegexQuestionValidation",
+                "ToDateQuestionValidation": "#/$defs/ToDateQuestionValidation",
+                "ToDateTimeQuestionValidation": "#/$defs/ToDateTimeQuestionValidation",
+                "ToTimeQuestionValidation": "#/$defs/ToTimeQuestionValidation"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/MinLengthQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/MaxLengthQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/RegexQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/OrcidQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/DoiQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/MinNumberQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/MaxNumberQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/FromDateQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/ToDateQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/FromDateTimeQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/ToDateTimeQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/FromTimeQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/ToTimeQuestionValidation"
+              },
+              {
+                "$ref": "#/$defs/DomainQuestionValidation"
+              }
+            ]
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "uuid",
+        "title"
+      ],
+      "title": "ValueQuestion",
+      "type": "object"
+    },
+    "Workspace": {
+      "additionalProperties": false,
+      "properties": {
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "uuid",
+        "name"
+      ],
+      "title": "Workspace",
+      "type": "object"
+    }
+  }
+}
